@@ -1,7 +1,7 @@
 # Личный проект «Угадай мелодию» [![Build status][travis-image]][travis-url]
 
 * Студент: [Настя Скоблова](https://up.htmlacademy.ru/ecmascript/4/user/49209).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Харин](https://htmlacademy.ru/profile/dihar).
 
 ---
 
