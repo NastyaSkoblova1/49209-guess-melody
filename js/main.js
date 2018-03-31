@@ -1,45 +1,28 @@
-const arrOfDisplays = [];
-const template = document.querySelector('#templates');
-const mainDisplay = document.querySelector('section.main');
-const displays = template.content.querySelectorAll('.main');
-
-displays.forEach(function(element) {
-	arrOfDisplays.push(element);
-});
-
-const showDisplay = (number) => {
-	mainDisplay.appendChild(arrOfDisplays[number]);
-}
-
-const hideDisplay = (number) => {
-	mainDisplay.removeChild(arrOfDisplays[number]);
-}
-
-
+const template = document.querySelector(`#templates`);
+const mainDisplay = document.querySelector(`section.main`);
+const displays = template.content.querySelectorAll(`.main`);
 let numberOfDisplay = 0;
 
-document.onkeydown = function(e) {
+const showDisplay = (number) => {
+  mainDisplay.innerHTML = ``;
+  mainDisplay.appendChild(displays[number]);
+};
 
-	if (e.altKey && e.keyCode == 39) {
-		if (numberOfDisplay < arrOfDisplays.length - 1) {
-			hideDisplay(numberOfDisplay);
-			numberOfDisplay++;
-			showDisplay(numberOfDisplay);
-		}
-
-		e.preventDefault();
-	}
-
-	if (e.altKey && e.keyCode == 37) {
-		if (numberOfDisplay > 0) {
-			hideDisplay(numberOfDisplay);
-			numberOfDisplay--;
-			showDisplay(numberOfDisplay);
-		}
-
-		e.preventDefault;
-	}
-
-}
+document.onkeydown = function (e) {
+  if (e.altKey && e.keyCode === 39) {
+    if (numberOfDisplay < displays.length - 1) {
+      numberOfDisplay++;
+      showDisplay(numberOfDisplay);
+    }
+    e.preventDefault();
+  }
+  if (e.altKey && e.keyCode === 37) {
+    if (numberOfDisplay > 0) {
+      numberOfDisplay--;
+      showDisplay(numberOfDisplay);
+    }
+    e.preventDefault();
+  }
+};
 
 showDisplay(0);
