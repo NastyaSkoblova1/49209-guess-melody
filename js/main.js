@@ -1,28 +1,12 @@
-const template = document.querySelector(`#templates`);
-const mainDisplay = document.querySelector(`section.main`);
-const displays = template.content.querySelectorAll(`.main`);
-let numberOfDisplay = 0;
+import {createElement, changeView} from './util.js';
+import welcomeElement from './module-welcome.js';
+import levelArtistElement from './module-level-artist.js';
+import levelGenreElement from './module-level-genre.js';
+import resultElement from './module-result.js';
+import resultEffortsElement from './module-result-efforts.js';
+import resultTimeElement from './module-result-time.js';
 
-const showDisplay = (number) => {
-  mainDisplay.innerHTML = ``;
-  mainDisplay.appendChild(displays[number]);
-};
+changeView(welcomeElement);
 
-document.onkeydown = function (e) {
-  if (e.altKey && e.keyCode === 39) {
-    if (numberOfDisplay < displays.length - 1) {
-      numberOfDisplay++;
-      showDisplay(numberOfDisplay);
-    }
-    e.preventDefault();
-  }
-  if (e.altKey && e.keyCode === 37) {
-    if (numberOfDisplay > 0) {
-      numberOfDisplay--;
-      showDisplay(numberOfDisplay);
-    }
-    e.preventDefault();
-  }
-};
+export default element;
 
-showDisplay(0);
