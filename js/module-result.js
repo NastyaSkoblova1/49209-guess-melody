@@ -12,9 +12,10 @@ const resultElementTemplate = `
 
 const resultElement = createElement(resultElementTemplate);
 const buttonRestart = resultElement.querySelector(`.main-replay`);
-
-buttonRestart.onclick = function () {
+const changeScreenOnWelcome = () => {
   changeView(welcomeElement);
 };
+
+buttonRestart.addEventListener(`click`, changeScreenOnWelcome);
 
 export default resultElement;

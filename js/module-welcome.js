@@ -13,9 +13,10 @@ const welcomeElementTemplate = `
 
 const welcomeElement = createElement(welcomeElementTemplate);
 const buttonPlay = welcomeElement.querySelector(`button.main-play`);
-
-buttonPlay.onclick = function () {
+const changeScreenOnLevelArtist = () => {
   changeView(levelArtistElement);
 };
+
+buttonPlay.addEventListener(`click`, changeScreenOnLevelArtist);
 
 export default welcomeElement;

@@ -62,11 +62,12 @@ const levelArtistElementTemplate = `
 
 const levelArtistElement = createElement(levelArtistElementTemplate);
 const mainAnswer = levelArtistElement.querySelectorAll(`.main-answer`);
+const mainAnswerToArray = [...mainAnswer];
 
-mainAnswer.forEach(function (element) {
-  element.onclick = function () {
+mainAnswerToArray.forEach(function (element) {
+  element.addEventListener(`click`, function () {
     changeView(levelGenreElement);
-  };
+  });
 });
 
 export default levelArtistElement;

@@ -9,9 +9,10 @@ const resultEffortsElementTemplate = `
 
 const resultEffortsElement = createElement(resultEffortsElementTemplate);
 const buttonRestart = resultEffortsElement.querySelector(`.main-replay`);
-
-buttonRestart.onclick = function () {
+const changeScreenOnWelcome = () => {
   changeView(welcomeElement);
 };
+
+buttonRestart.addEventListener(`click`, changeScreenOnWelcome);
 
 export default resultEffortsElement;

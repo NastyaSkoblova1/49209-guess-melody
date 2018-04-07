@@ -9,9 +9,10 @@ const resultTimeElementTemplate = `
 
 const resultTimeElement = createElement(resultTimeElementTemplate);
 const buttonRestart = resultTimeElement.querySelector(`.main-replay`);
-
-buttonRestart.onclick = function () {
+const changeScreenOnWelcome = () => {
   changeView(welcomeElement);
 };
+
+buttonRestart.addEventListener(`click`, changeScreenOnWelcome);
 
 export default resultTimeElement;

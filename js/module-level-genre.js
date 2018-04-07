@@ -90,23 +90,27 @@ const buttonGenreAnswer = levelGenreElement.querySelector(`.genre-answer-send`);
 const answerCheck = levelGenreElement.querySelectorAll(`.player-wrapper input`);
 const form = levelGenreElement.querySelector(`.genre`);
 const resultDisplayArr = [resultElement, resultEffortsElement, resultTimeElement];
+buttonGenreAnswer.disabled = true;
 
-const getNumberOfResultDisplay = function () {
+const getNumberOfResultDisplay = () => {
   return Math.floor(Math.random() * resultDisplayArr.length);
 };
 
-buttonGenreAnswer.setAttribute(`disabled`, `disabled`);
-
-form.onchange = function () {
-  buttonGenreAnswer.removeAttribute(`disabled`);
+const removeDisabledFromButton = () => {
+  buttonGenreAnswer.disabled = false;
 };
 
-buttonGenreAnswer.onclick = function () {
+const changeScreenOnResult = (e) => {
   changeView(resultDisplayArr[getNumberOfResultDisplay()]);
-  buttonGenreAnswer.setAttribute(`disabled`, `disabled`);
+  buttonGenreAnswer.disabled = true;
   answerCheck.forEach(function (element) {
-    element.removeAttribute(`checked`);
+    element.checked = false;
   });
+
+  e.preventDefault();
 };
+
+form.addEventListener(`change`, removeDisabledFromButton);
+buttonGenreAnswer.addEventListener(`click`, changeScreenOnResult);
 
 export default levelGenreElement;
