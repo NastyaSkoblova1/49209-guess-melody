@@ -101,13 +101,12 @@ const removeDisabledFromButton = () => {
 };
 
 const changeScreenOnResult = (e) => {
-  changeView(resultDisplayArr[getNumberOfResultDisplay()]);
-  buttonGenreAnswer.disabled = true;
+  e.preventDefault();
   answerCheck.forEach((element) => {
     element.checked = false;
   });
-
-  e.preventDefault();
+  buttonGenreAnswer.disabled = true;
+  changeView(resultDisplayArr[getNumberOfResultDisplay()]);
 };
 
 form.addEventListener(`change`, removeDisabledFromButton);

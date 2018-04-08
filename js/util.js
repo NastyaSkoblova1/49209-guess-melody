@@ -1,9 +1,9 @@
-const main = document.querySelector(`.main`);
+const main = document.querySelector(`.app`);
 
 export const createElement = (template) => {
   const outer = document.createElement(`div`);
   outer.innerHTML = template;
-  return outer;
+  return outer.firstElementChild;
 };
 
 export const changeView = (element) => {
