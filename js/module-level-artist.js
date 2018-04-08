@@ -65,7 +65,7 @@ const mainAnswer = levelArtistElement.querySelectorAll(`.main-answer`);
 const mainAnswerToArray = [...mainAnswer];
 
 mainAnswerToArray.forEach(function (element) {
-  element.addEventListener(`click`, function () {
+  element.addEventListener(`click`, () => {
     changeView(levelGenreElement);
   });
 });
