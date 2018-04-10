@@ -87,29 +87,32 @@ const levelGenreElementTemplate = `
 
 const levelGenreElement = createElement(levelGenreElementTemplate);
 const buttonGenreAnswer = levelGenreElement.querySelector(`.genre-answer-send`);
-const answerCheck = levelGenreElement.querySelectorAll(`.player-wrapper input`);
+const playerControl = levelGenreElement.querySelectorAll(`.player-control`);
+const answerCheck = levelGenreElement.querySelectorAll(`.genre-answer input`);
 const form = levelGenreElement.querySelector(`.genre`);
 const resultDisplayArr = [resultElement, resultEffortsElement, resultTimeElement];
+const playerControlArray = [...playerControl];
+const answerCheckArray = [...answerCheck];
 buttonGenreAnswer.disabled = true;
 
-const getNumberOfResultDisplay = () => {
-  return Math.floor(Math.random() * resultDisplayArr.length);
-};
+playerControlArray.forEach((element) => {
+  element.disabled = true;
+});
+
+const getNumberOfResultDisplay = () => Math.floor(Math.random() * resultDisplayArr.length);
+
+const checkAnswer = () => answerCheckArray.some((element) => element.checked);
 
 const removeDisabledFromButton = () => {
-  buttonGenreAnswer.disabled = false;
+  buttonGenreAnswer.disabled = checkAnswer() ? false : true;
 };
 
 const changeScreenOnResult = (e) => {
   e.preventDefault();
-  answerCheck.forEach((element) => {
-    element.checked = false;
-  });
-  buttonGenreAnswer.disabled = true;
   changeView(resultDisplayArr[getNumberOfResultDisplay()]);
 };
 
 form.addEventListener(`change`, removeDisabledFromButton);
-buttonGenreAnswer.addEventListener(`click`, changeScreenOnResult);
+form.addEventListener(`submit`, changeScreenOnResult);
 
 export default levelGenreElement;
