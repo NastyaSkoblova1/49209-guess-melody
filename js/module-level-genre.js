@@ -104,7 +104,7 @@ const getNumberOfResultDisplay = () => Math.floor(Math.random() * resultDisplayA
 const checkAnswer = () => answerCheckArray.some((element) => element.checked);
 
 const removeDisabledFromButton = () => {
-  buttonGenreAnswer.disabled = checkAnswer() ? false : true;
+  buttonGenreAnswer.disabled = !checkAnswer();
 };
 
 const changeScreenOnResult = (e) => {
