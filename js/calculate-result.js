@@ -1,5 +1,5 @@
 export const calculateResult = (answers) => {
-  const rightAnswer = 0;
+  let rightAnswer = 0;
 
   if (answers.length < 10) {
     return -1;
