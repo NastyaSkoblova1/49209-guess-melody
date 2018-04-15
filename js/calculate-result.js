@@ -1,4 +1,4 @@
-export const calculateResult = (answers) => {
+export const calculateResult = (answers, notes) => {
   let rightAnswer = 0;
 
   if (answers.length < 10) {
@@ -8,6 +8,10 @@ export const calculateResult = (answers) => {
   answers.forEach((element) => {
     if (!element.correct) {
       rightAnswer -= 2;
+
+      if (notes > 0) {
+        notes = notes - 1;
+      }
     }
 
     if (element.correct && element.correct >= 30) {
@@ -18,6 +22,10 @@ export const calculateResult = (answers) => {
       rightAnswer += 2;
     }
   });
+
+  // if (notes === 0) {
+  //   return -1;
+  // }
 
   return rightAnswer;
 };
