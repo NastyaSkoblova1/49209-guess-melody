@@ -1,31 +1,27 @@
 export const calculateResult = (answers, notes) => {
+  const REQUIRED_ANSWERS_AMOUNT = 10;
+  const TIME_LIMIT = 30;
+  const FAST_AND_CORRECT = 2;
+  const SLOW_AND_CORRECT = 1;
+  const WRONG = -2;
   let rightAnswer = 0;
 
-  if (answers.length < 10) {
+  if (answers.length < REQUIRED_ANSWERS_AMOUNT) {
     return -1;
   }
 
   answers.forEach((element) => {
-    if (!element.correct) {
-      rightAnswer -= 2;
+    if (element.correct) {
+      rightAnswer += element.time >= TIME_LIMIT ? SLOW_AND_CORRECT : FAST_AND_CORRECT;
+    } else {
+      rightAnswer += WRONG;
 
       if (notes > 0) {
         notes = notes - 1;
       }
     }
 
-    if (element.correct && element.correct >= 30) {
-      rightAnswer += 1;
-    }
-
-    if (element.correct && element.time < 30) {
-      rightAnswer += 2;
-    }
   });
-
-  // if (notes === 0) {
-  //   return -1;
-  // }
 
   return rightAnswer;
 };
