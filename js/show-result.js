@@ -1,5 +1,4 @@
 export const showResult = (otherResults, ourResult) => {
-  const scores = [];
   let ourScore = ourResult.score;
 
   if (ourResult.time === 0) {
@@ -10,9 +9,7 @@ export const showResult = (otherResults, ourResult) => {
     return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
   }
 
-  otherResults.forEach((element) => {
-    scores.push(element.score);
-  });
+  const scores = otherResults.map((it) => it.score);
   scores.push(ourScore);
 
   scores.sort((a, b) => {
