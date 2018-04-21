@@ -24,7 +24,7 @@ const renderGenreVariants = () => {
         <div class="genre-answer">
           <div class="player-wrapper">
             <div class="player">
-              <audio></audio>
+              <audio src="${answer}"></audio>
               <button class="player-control player-control--pause player-control--play"></button>
               <div class="player-track">
                 <span class="player-status"></span>

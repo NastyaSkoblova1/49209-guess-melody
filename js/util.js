@@ -1,4 +1,4 @@
-const main = document.querySelector(`.app`);
+export const main = document.querySelector(`.app`);
 
 export const createElement = (template) => {
   const outer = document.createElement(`div`);
