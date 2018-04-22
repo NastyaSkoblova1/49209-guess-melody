@@ -42,16 +42,21 @@ const levelArtistElementTemplate = () => `
 // const levelArtistElement = createElement(levelArtistElementTemplate());
 const levelArtistElement = createElement(levelArtistElementTemplate());
 
+let mainAnswer = levelArtistElement.querySelectorAll(`.main-answer`);
+let mainAnswerToArray = [...mainAnswer];
+
 const renderScreen = (game) => {
   main.innerHTML = ``;
   main.appendChild(createElement(levelArtistElementTemplate(game[`level-` + initialState.level])));
+  mainAnswer = levelArtistElement.querySelectorAll(`.main-answer`);
+  mainAnswerToArray = [...mainAnswer];
+  debugger;
 };
 
-const mainAnswer = levelArtistElement.querySelectorAll(`.main-answer`);
-const mainAnswerToArray = [...mainAnswer];
-
-mainAnswerToArray.forEach(function (element) {
+mainAnswerToArray.forEach((element) => {
+  console.log(element);
   element.addEventListener(`click`, () => {
+    console.log('click');
     initialState.level += 1;
     renderScreen(gameData);
   });
