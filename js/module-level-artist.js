@@ -1,5 +1,5 @@
 import {main, createElement} from './util.js';
-import {initialState, gameData} from './data.js';
+import {initialState, levels} from './data.js';
 import renderHeader from './header.js';
 
 // const levelArtist = {
@@ -7,9 +7,9 @@ import renderHeader from './header.js';
 //   answers: new Set([`Пелагея`, `Краснознаменная дивизия имени моей бабушки`, `Lorde`])
 // };
 
-const renderArtistVariants = () => {
+const renderArtistVariants = (level) => {
   return `
-  ${[...gameData[`level-` + initialState.level].answers].map((answer, i) => `
+  ${[...level.answers].map((answer, i) => `
   <div class="main-answer-wrapper">
     <input class="main-answer-r" type="radio" id="answer-${i + 1}" name="answer" value="val-${i + 1}"/>
     <label class="main-answer" for="answer-${i + 1}">
@@ -20,14 +20,14 @@ const renderArtistVariants = () => {
   </div>`).join(``)}`;
 };
 
-const levelArtistElementTemplate = () => `
+const levelArtistElementTemplate = (level) => `
 <section class="main main--level main--level-artist">
   ${renderHeader()}
   <div class="main-wrap">
     <h2 class="title main-title">Кто исполняет эту песню?</h2>
     <div class="player-wrapper">
       <div class="player">
-        <audio src="${gameData[`level-` + initialState.level].src}"></audio>
+        <audio src="${level.src}"></audio>
         <button class="player-control player-control--pause"></button>
         <div class="player-track">
           <span class="player-status"></span>
@@ -35,31 +35,20 @@ const levelArtistElementTemplate = () => `
       </div>
     </div>;
     <form class="main-list">
-    ${renderArtistVariants(gameData)}
+    ${renderArtistVariants(level)}
     </form>
   </div></section>`;
 
-// const levelArtistElement = createElement(levelArtistElementTemplate());
-const levelArtistElement = createElement(levelArtistElementTemplate());
+const levelArtistElement = createElement(levelArtistElementTemplate(levels[`level-` + initialState.level]));
 
-let mainAnswer = levelArtistElement.querySelectorAll(`.main-answer`);
-let mainAnswerToArray = [...mainAnswer];
+const mainList = levelArtistElement.querySelector(`.main-list`);
 
-const renderScreen = (game) => {
+const renderScreen = () => {
+  initialState.level += 1;
   main.innerHTML = ``;
-  main.appendChild(createElement(levelArtistElementTemplate(game[`level-` + initialState.level])));
-  mainAnswer = levelArtistElement.querySelectorAll(`.main-answer`);
-  mainAnswerToArray = [...mainAnswer];
-  debugger;
+  main.appendChild(createElement(levelArtistElementTemplate(levels[`level-` + initialState.level])));
 };
 
-mainAnswerToArray.forEach((element) => {
-  console.log(element);
-  element.addEventListener(`click`, () => {
-    console.log('click');
-    initialState.level += 1;
-    renderScreen(gameData);
-  });
-});
+mainList.addEventListener(`change`, renderScreen);
 
 export default levelArtistElement;

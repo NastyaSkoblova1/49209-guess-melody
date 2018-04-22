@@ -4,8 +4,9 @@ export const initialState = {
   time: 300
 };
 
-export const gameData = {
+export const levels = {
   'level-1': {
+    type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
     answers: [
       {
@@ -23,6 +24,7 @@ export const gameData = {
     ]
   },
   'level-2': {
+    type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
     answers: [
       {
@@ -40,6 +42,7 @@ export const gameData = {
     ]
   },
   'level-3': {
+    type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
     answers: [
       {
@@ -57,6 +60,7 @@ export const gameData = {
     ]
   },
   'level-4': {
+    type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
     answers: [
       {
@@ -74,6 +78,7 @@ export const gameData = {
     ]
   },
   'level-5': {
+    type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
     answers: [
       {
@@ -88,6 +93,101 @@ export const gameData = {
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
       },
+    ]
+  },
+  'level-6': {
+    type: `genre`,
+    question: `Выберите электронные треки`,
+    genre: `Electronic`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+      }
+    ]
+  },
+  'level-7': {
+    type: `genre`,
+    question: `Выберите джаз треки`,
+    genre: `Jazz`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+      }
+    ]
+  },
+  'level-8': {
+    type: `genre`,
+    question: `Выберите поп треки`,
+    genre: `Pop`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+      }
+    ]
+  },
+  'level-9': {
+    type: `genre`,
+    question: `Выберите рок треки`,
+    genre: `Rock`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+      }
+    ]
+  },
+  'level-10': {
+    type: `genre`,
+    question: `Выберите кантри треки`,
+    genre: `Country`,
+    answers: [
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+      },
+      {
+        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+      }
     ]
   }
 };
