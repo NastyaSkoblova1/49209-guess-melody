@@ -1,10 +1,8 @@
 import {createElement, changeView} from './util.js';
-import renderLogo from './logo.js';
 import welcomeElement from './module-welcome.js';
 
 const resultElementTemplate = `
-  <section class="main main--result">
-  	${renderLogo()};
+  <section class="main main--result"><section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
     <h2 class="title">Вы настоящий меломан!</h2>
     <div class="main-stat">За&nbsp;3&nbsp;минуты и 25&nbsp;секунд
       <br>вы&nbsp;набрали 12 баллов (8 быстрых)

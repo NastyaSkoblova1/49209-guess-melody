@@ -21,6 +21,10 @@ export const calculateResult = (answers, notes) => {
       }
     }
 
+    if (element.time < 0) {
+      throw new Error(`Time should be >= 0`);
+    }
+
   });
 
   return rightAnswer;
