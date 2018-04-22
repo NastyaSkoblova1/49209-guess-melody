@@ -1,17 +1,3 @@
-export const createAnswerObject = (answerCorrect, answerTime) => ({
-  correct: answerCorrect,
-  time: answerTime
-});
-
-export const generateAnswers = (createAnswer, answersCount, answerCorrect, answerTime) => {
-  const answers = [];
-  let i;
-  for (i = 0; i < answersCount; i++) {
-    answers.push(createAnswer(answerCorrect, answerTime));
-  }
-  return answers;
-};
-
 export const calculateResult = (answers, notes) => {
   const REQUIRED_ANSWERS_AMOUNT = 10;
   const TIME_LIMIT = 30;
@@ -33,6 +19,10 @@ export const calculateResult = (answers, notes) => {
       if (notes > 0) {
         notes = notes - 1;
       }
+    }
+
+    if (element.time < 0) {
+      throw new Error(`Time should be >= 0`);
     }
 
   });

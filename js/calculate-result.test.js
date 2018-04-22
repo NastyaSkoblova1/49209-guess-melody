@@ -1,5 +1,19 @@
 import {assert} from 'chai';
-import {createAnswerObject, generateAnswers, calculateResult} from './calculate-result.js';
+import {calculateResult} from './calculate-result.js';
+
+const createAnswerObject = (answerCorrect, answerTime) => ({
+  correct: answerCorrect,
+  time: answerTime
+});
+
+const generateAnswers = (createAnswer, answersCount, answerCorrect, answerTime) => {
+  const answers = [];
+  let i;
+  for (i = 0; i < answersCount; i++) {
+    answers.push(createAnswer(answerCorrect, answerTime));
+  }
+  return answers;
+};
 
 let ourNotes = 3;
 
@@ -18,5 +32,9 @@ describe(`Calculate result`, () => {
 
   it(`should return -20 if all answers are wrong`, () => {
     assert.equal(calculateResult(generateAnswers(createAnswerObject, 10, false, 15), ourNotes), -20);
+  });
+
+  it(`should not time < 0`, () => {
+    assert.throws(() => calculateResult(generateAnswers(createAnswerObject, 10, true, -1), ourNotes), /Time should be >= 0/);
   });
 });
