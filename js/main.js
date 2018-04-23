@@ -1,4 +1,4 @@
-import {changeView} from './util.js';
+import {renderScreen} from './util.js';
 import welcomeElement from './module-welcome.js';
 
-changeView(welcomeElement);
+renderScreen(welcomeElement);

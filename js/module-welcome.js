@@ -1,4 +1,5 @@
-import {createElement, changeView} from './util.js';
+import {createElement, renderScreen} from './util.js';
+import {initialState} from './data.js';
 import renderLogo from './logo.js';
 import levelArtistElement from './module-level-artist.js';
 
@@ -16,7 +17,7 @@ const welcomeElementTemplate = `
 const welcomeElement = createElement(welcomeElementTemplate);
 const buttonPlay = welcomeElement.querySelector(`button.main-play`);
 const changeScreenOnLevelArtist = () => {
-  changeView(levelArtistElement);
+  renderScreen(levelArtistElement(initialState));
 };
 
 buttonPlay.addEventListener(`click`, changeScreenOnLevelArtist);

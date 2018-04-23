@@ -9,9 +9,9 @@ export default () => {
       style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
 
     <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
-      <span class="timer-value-mins">${`0` + initialState.time / 60}</span><!--
-      --><span class="timer-value-dots">:</span><!--
-      --><span class="timer-value-secs">00</span>
+      <span class="timer-value-mins">${`0` + initialState.time / 60}</span>
+      <span class="timer-value-dots">:</span>
+      <span class="timer-value-secs">00</span>
     </div>
   </svg>
   <div class="main-mistakes">

@@ -1,11 +1,6 @@
-import {main, createElement} from './util.js';
-import {initialState, levels} from './data.js';
+import {createElement} from './util.js';
+import {levels, changeLevel} from './data.js';
 import renderHeader from './header.js';
-
-// const levelArtist = {
-//   audioQuestion: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
-//   answers: new Set([`Пелагея`, `Краснознаменная дивизия имени моей бабушки`, `Lorde`])
-// };
 
 const renderArtistVariants = (level) => {
   return `
@@ -33,22 +28,22 @@ const levelArtistElementTemplate = (level) => `
           <span class="player-status"></span>
         </div>
       </div>
-    </div>;
+    </div>
     <form class="main-list">
     ${renderArtistVariants(level)}
     </form>
   </div></section>`;
 
-const levelArtistElement = createElement(levelArtistElementTemplate(levels[`level-` + initialState.level]));
+const levelArtistElement = (data) => {
+  const levelArtist = createElement(levelArtistElementTemplate(levels[data.level]));
+  const mainList = levelArtist.querySelector(`.main-list`);
 
-const mainList = levelArtistElement.querySelector(`.main-list`);
+  mainList.addEventListener(`change`, () => {
+    data.level++;
+    changeLevel(levels[data.level].type);
+  });
 
-const renderScreen = () => {
-  initialState.level += 1;
-  main.innerHTML = ``;
-  main.appendChild(createElement(levelArtistElementTemplate(levels[`level-` + initialState.level])));
+  return levelArtist;
 };
-
-mainList.addEventListener(`change`, renderScreen);
 
 export default levelArtistElement;
