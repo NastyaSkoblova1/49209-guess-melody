@@ -1,5 +1,5 @@
-import {createElement} from './util.js';
-import {levels, changeLevel} from './data.js';
+import {createElement, playAudio} from './util.js';
+import {levels, scoreVariables, changeLevel} from './data.js';
 import renderHeader from './header.js';
 
 const renderArtistVariants = (level) => {
@@ -22,7 +22,7 @@ const levelArtistElementTemplate = (level) => `
     <h2 class="title main-title">Кто исполняет эту песню?</h2>
     <div class="player-wrapper">
       <div class="player">
-        <audio src="${level.src}"></audio>
+        <audio src="${level.src}" autoplay></audio>
         <button class="player-control player-control--pause"></button>
         <div class="player-track">
           <span class="player-status"></span>
@@ -36,12 +36,27 @@ const levelArtistElementTemplate = (level) => `
 
 const levelArtistElement = (data) => {
   const levelArtist = createElement(levelArtistElementTemplate(levels[data.level]));
-  const mainList = levelArtist.querySelector(`.main-list`);
+  const mainAnswers = levelArtist.querySelectorAll(`.main-answer`);
 
-  mainList.addEventListener(`change`, () => {
-    data.level++;
-    changeLevel(levels[data.level].type);
+  [...mainAnswers].forEach((mainAnswer) => {
+    mainAnswer.addEventListener(`click`, () => {
+      data.level++;
+      if (mainAnswer.innerText === levels[data.level].rightAnswer) {
+        data.score += scoreVariables.SLOW_AND_CORRECT;
+      } else {
+        data.notes += 1;
+      }
+
+      if (data.notes < 3) {
+        changeLevel(levels[data.level].type);
+      } else {
+        changeLevel();
+      }
+
+    });
   });
+
+  playAudio();
 
   return levelArtist;
 };

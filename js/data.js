@@ -2,9 +2,42 @@ import {renderScreen} from './util.js';
 import levelArtistElement from './module-level-artist.js';
 import levelGenreElement from './module-level-genre.js';
 import resultElement from './module-result.js';
+import resultEffortsElement from './module-result-efforts.js';
+
+// const otherInitialState = [
+//   {
+//     score: 18,
+//     notes: 2,
+//     time: 5
+//   },
+//   {
+//     score: 5,
+//     notes: 2,
+//     time: 0
+//   },
+//   {
+//     score: 12,
+//     notes: 1,
+//     time: 15
+//   },
+//   {
+//     score: -5,
+//     notes: 1,
+//     time: 10
+//   }
+// ];
+
+export const scoreVariables = {
+  REQUIRED_ANSWERS_AMOUNT: 10,
+  TIME_LIMIT: 30,
+  FAST_AND_CORRECT: 2,
+  SLOW_AND_CORRECT: 1,
+  WRONG: -2
+};
 
 export const initialState = {
   level: 1,
+  score: 0,
   notes: 0,
   time: 300
 };
@@ -13,6 +46,7 @@ export const levels = {
   1: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+    rightAnswer: `Audionautix`,
     answers: [
       {
         artist: `Audionautix`,
@@ -31,6 +65,7 @@ export const levels = {
   2: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+    rightAnswer: `Kevin MacLeod`,
     answers: [
       {
         artist: `Kevin MacLeod`,
@@ -49,6 +84,7 @@ export const levels = {
   3: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+    rightAnswer: `Riot`,
     answers: [
       {
         artist: `Riot`,
@@ -67,6 +103,7 @@ export const levels = {
   4: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+    rightAnswer: `Jingle Punks`,
     answers: [
       {
         artist: `Jingle Punks`,
@@ -85,6 +122,7 @@ export const levels = {
   5: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+    rightAnswer: `Jingle Punks`,
     answers: [
       {
         artist: `Audionautix`,
@@ -103,103 +141,140 @@ export const levels = {
   6: {
     type: `genre`,
     question: `Выберите электронные треки`,
-    genre: `Electronic`,
+    genreQuestion: `Electronic`,
     answers: [
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`
+        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       }
     ]
   },
   7: {
     type: `genre`,
     question: `Выберите джаз треки`,
-    genre: `Jazz`,
+    genreQuestion: `Jazz`,
     answers: [
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`
+        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+        genre: `Jazz`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       }
     ]
   },
   8: {
     type: `genre`,
     question: `Выберите поп треки`,
-    genre: `Pop`,
+    genreQuestion: `Pop`,
     answers: [
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`
+        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+        genre: `Jazz`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`
+        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       }
     ]
   },
   9: {
     type: `genre`,
     question: `Выберите рок треки`,
-    genre: `Rock`,
+    genreQuestion: `Rock`,
     answers: [
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`
+        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       }
     ]
   },
   10: {
     type: `genre`,
     question: `Выберите кантри треки`,
-    genre: `Country`,
+    genreQuestion: `Country`,
     answers: [
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`
+        src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       },
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`
+        src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`
       }
     ]
   }
 };
 
+const restart = () => {
+  const restartBtn = document.querySelector(`.main-replay`);
+  restartBtn.addEventListener(`click`, () => {
+    initialState.level = 1;
+    initialState.score = 0;
+    initialState.notes = 0;
+    initialState.time = 300;
+    renderScreen(levelArtistElement(initialState));
+  });
+};
+
 export const changeLevel = (levelType) => {
   if (initialState.level >= 10) {
-    renderScreen(resultElement());
+    renderScreen(resultElement(initialState));
+    restart();
+  }
+
+  if (initialState.notes === 3) {
+    renderScreen(resultEffortsElement(initialState));
+    restart();
   }
 
   if (levelType === `artist`) {
