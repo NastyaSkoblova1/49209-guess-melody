@@ -37,10 +37,10 @@ const levelArtistElementTemplate = (level) => `
 const levelArtistElement = (data) => {
   const levelArtist = createElement(levelArtistElementTemplate(levels[data.level]));
   const mainAnswers = levelArtist.querySelectorAll(`.main-answer`);
+  playAudio();
 
   [...mainAnswers].forEach((mainAnswer) => {
     mainAnswer.addEventListener(`click`, () => {
-      data.level++;
       if (mainAnswer.innerText === levels[data.level].rightAnswer) {
         data.score += scoreVariables.SLOW_AND_CORRECT;
       } else {
@@ -48,15 +48,13 @@ const levelArtistElement = (data) => {
       }
 
       if (data.notes < 3) {
-        changeLevel(levels[data.level].type);
+        changeLevel(levels[data.level++].type);
       } else {
         changeLevel();
       }
 
     });
   });
-
-  playAudio();
 
   return levelArtist;
 };
