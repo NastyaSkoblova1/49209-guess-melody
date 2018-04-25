@@ -4,28 +4,28 @@ import levelGenreElement from './module-level-genre.js';
 import resultElement from './module-result.js';
 import resultEffortsElement from './module-result-efforts.js';
 
-// const otherInitialState = [
-//   {
-//     score: 18,
-//     notes: 2,
-//     time: 5
-//   },
-//   {
-//     score: 5,
-//     notes: 2,
-//     time: 0
-//   },
-//   {
-//     score: 12,
-//     notes: 1,
-//     time: 15
-//   },
-//   {
-//     score: -5,
-//     notes: 1,
-//     time: 10
-//   }
-// ];
+const otherInitialState = [
+  {
+    score: 18,
+    notes: 2,
+    time: 5
+  },
+  {
+    score: 5,
+    notes: 2,
+    time: 0
+  },
+  {
+    score: 12,
+    notes: 1,
+    time: 15
+  },
+  {
+    score: -5,
+    notes: 1,
+    time: 10
+  }
+];
 
 export const scoreVariables = {
   REQUIRED_ANSWERS_AMOUNT: 10,
@@ -255,7 +255,29 @@ export const levels = {
   }
 };
 
-const restart = () => {
+const compareResult = () => {
+  const scores = otherInitialState.map((it) => it.score);
+  scores.push(initialState.score);
+
+  scores.sort((a, b) => {
+    return b - a;
+  });
+
+  const amountOfPlayers = scores.length;
+  const ourPlace = scores.indexOf(initialState.score) + 1;
+  const ourPercent = (amountOfPlayers - ourPlace) / amountOfPlayers * 100;
+
+
+  const resultState = {
+    players: amountOfPlayers,
+    place: ourPlace,
+    percent: ourPercent
+  };
+
+  return resultState;
+};
+
+const restartGame = () => {
   const restartBtn = document.querySelector(`.main-replay`);
   restartBtn.addEventListener(`click`, () => {
     initialState.level = 1;
@@ -268,14 +290,14 @@ const restart = () => {
 
 export const changeLevel = (levelType) => {
   if (initialState.level >= 10) {
-    renderScreen(resultElement(initialState));
-    restart();
+    renderScreen(resultElement(initialState, compareResult()));
+    restartGame();
   }
 
-  if (initialState.notes === 3) {
-    renderScreen(resultEffortsElement(initialState));
-    restart();
-  }
+  // if (initialState.notes === 3) {
+  //   renderScreen(resultEffortsElement(initialState));
+  //   restartGame();
+  // }
 
   if (levelType === `artist`) {
     renderScreen(levelArtistElement(initialState));
