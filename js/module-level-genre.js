@@ -1,5 +1,6 @@
-import {createElement, playAudio} from './util.js';
-import {levels, scoreVariables, changeLevel} from './data.js';
+import {createElement} from './util.js';
+import {levels} from './data.js';
+import {calculateResult, showResult} from './gameplay.js';
 import renderHeader from './header.js';
 
 const renderGenreQuestion = (level) => {
@@ -21,7 +22,7 @@ const renderGenreVariants = (level) => {
             </div>
           </div>
         </div>
-        <input type="checkbox" name="answer" value="${answer.genre}" id="a-${i + 1}">
+        <input type="checkbox" name="answer" value="${answer.genre}" id="a-${i + 1}" data-id="${answer.id}">
         <label class="genre-answer-check" for="a-${i + 1}"></label>
       </div>`).join(``)}
     <button class="genre-answer-send" type="submit">Ответить</button>
@@ -56,24 +57,13 @@ const levelGenreElement = (data) => {
   });
 
   form.addEventListener(`submit`, () => {
-    if (data.level < 10) {
-      data.level++;
-      changeLevel(levels[data.level].type);
-    } else {
-      changeLevel();
-    }
-
-    const answerChecked = document.querySelectorAll(`.genre-answer input:checked`);
-    [...answerChecked].forEach((answer) => {
-      if (answer.value === levels[data.genreQuestion]) {
-        data.score += scoreVariables.SLOW_AND_CORRECT;
-      } else {
-        data.notes += 1;
-      }
+    const answersChecked = document.querySelectorAll(`.genre-answer input:checked`);
+    [...answersChecked].forEach((answerChecked) => {
+      calculateResult(answerChecked);
     });
-  });
 
-  playAudio();
+    showResult();
+  });
 
   return levelGenre;
 };

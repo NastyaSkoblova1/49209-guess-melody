@@ -1,10 +1,4 @@
-import {renderScreen} from './util.js';
-import levelArtistElement from './module-level-artist.js';
-import levelGenreElement from './module-level-genre.js';
-import resultElement from './module-result.js';
-import resultEffortsElement from './module-result-efforts.js';
-
-const otherInitialState = [
+export const otherInitialState = [
   {
     score: 18,
     notes: 2,
@@ -27,7 +21,7 @@ const otherInitialState = [
   }
 ];
 
-export const scoreVariables = {
+export const scoreConst = {
   REQUIRED_ANSWERS_AMOUNT: 10,
   TIME_LIMIT: 30,
   FAST_AND_CORRECT: 2,
@@ -46,17 +40,20 @@ export const levels = {
   1: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
-    rightAnswer: `Audionautix`,
+    rightAnswer: 1,
     answers: [
       {
+        id: 1,
         artist: `Audionautix`,
         image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`
       },
       {
+        id: 2,
         artist: `Riot`,
         image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
       },
       {
+        id: 3,
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
       }
@@ -65,17 +62,20 @@ export const levels = {
   2: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
-    rightAnswer: `Kevin MacLeod`,
+    rightAnswer: 1,
     answers: [
       {
+        id: 1,
         artist: `Kevin MacLeod`,
         image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`
       },
       {
+        id: 2,
         artist: `Riot`,
         image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
       },
       {
+        id: 3,
         artist: `Jingle Punks`,
         image: `https://i.vimeocdn.com/portrait/992615_300x300`
       }
@@ -84,17 +84,20 @@ export const levels = {
   3: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
-    rightAnswer: `Riot`,
+    rightAnswer: 2,
     answers: [
       {
-        artist: `Riot`,
-        image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
-      },
-      {
+        id: 1,
         artist: `Jingle Punks`,
         image: `https://i.vimeocdn.com/portrait/992615_300x300`
       },
       {
+        id: 2,
+        artist: `Riot`,
+        image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
+      },
+      {
+        id: 3,
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
       }
@@ -103,36 +106,42 @@ export const levels = {
   4: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-    rightAnswer: `Jingle Punks`,
+    rightAnswer: 3,
     answers: [
       {
-        artist: `Jingle Punks`,
-        image: `https://i.vimeocdn.com/portrait/992615_300x300`
-      },
-      {
+        id: 1,
         artist: `Kevin MacLeod`,
         image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`
       },
       {
+        id: 2,
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
+      },
+      {
+        id: 3,
+        artist: `Jingle Punks`,
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`
       }
     ]
   },
   5: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
-    rightAnswer: `Jingle Punks`,
+    rightAnswer: 2,
     answers: [
       {
+        id: 1,
         artist: `Audionautix`,
         image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`
       },
       {
+        id: 2,
         artist: `Jingle Punks`,
         image: `https://i.vimeocdn.com/portrait/992615_300x300`
       },
       {
+        id: 3,
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
       },
@@ -141,21 +150,25 @@ export const levels = {
   6: {
     type: `genre`,
     question: `Выберите электронные треки`,
-    genreQuestion: `Electronic`,
+    rightAnswer: 3,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
-        genre: `R&B`
+        genre: `Electronic`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
         genre: `Country`
       }
@@ -164,21 +177,25 @@ export const levels = {
   7: {
     type: `genre`,
     question: `Выберите джаз треки`,
-    genreQuestion: `Jazz`,
+    rightAnswer: 2,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
         genre: `Jazz`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
         genre: `Rock`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
         genre: `Country`
       }
@@ -187,21 +204,25 @@ export const levels = {
   8: {
     type: `genre`,
     question: `Выберите поп треки`,
-    genreQuestion: `Pop`,
+    rightAnswer: 1,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
         genre: `Jazz`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
         genre: `R&B`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
         genre: `Country`
       }
@@ -210,21 +231,25 @@ export const levels = {
   9: {
     type: `genre`,
     question: `Выберите рок треки`,
-    genreQuestion: `Rock`,
+    rightAnswer: 2,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
         genre: `Rock`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
         genre: `R&B`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
         genre: `Country`
       }
@@ -233,77 +258,28 @@ export const levels = {
   10: {
     type: `genre`,
     question: `Выберите кантри треки`,
-    genreQuestion: `Country`,
+    rightAnswer: 3,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
         genre: `Rock`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
         genre: `Country`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
         genre: `R&B`
       }
     ]
-  }
-};
-
-const compareResult = () => {
-  const scores = otherInitialState.map((it) => it.score);
-  scores.push(initialState.score);
-
-  scores.sort((a, b) => {
-    return b - a;
-  });
-
-  const amountOfPlayers = scores.length;
-  const ourPlace = scores.indexOf(initialState.score) + 1;
-  const ourPercent = (amountOfPlayers - ourPlace) / amountOfPlayers * 100;
-
-
-  const resultState = {
-    players: amountOfPlayers,
-    place: ourPlace,
-    percent: ourPercent
-  };
-
-  return resultState;
-};
-
-const restartGame = () => {
-  const restartBtn = document.querySelector(`.main-replay`);
-  restartBtn.addEventListener(`click`, () => {
-    initialState.level = 1;
-    initialState.score = 0;
-    initialState.notes = 0;
-    initialState.time = 300;
-    renderScreen(levelArtistElement(initialState));
-  });
-};
-
-export const changeLevel = (levelType) => {
-  if (initialState.level >= 10) {
-    renderScreen(resultElement(initialState, compareResult()));
-    restartGame();
-  }
-
-  // if (initialState.notes === 3) {
-  //   renderScreen(resultEffortsElement(initialState));
-  //   restartGame();
-  // }
-
-  if (levelType === `artist`) {
-    renderScreen(levelArtistElement(initialState));
-  }
-
-  if (levelType === `genre`) {
-    renderScreen(levelGenreElement(initialState));
   }
 };

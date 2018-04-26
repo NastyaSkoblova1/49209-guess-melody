@@ -11,18 +11,18 @@ export const renderScreen = (element) => {
   main.appendChild(element);
 };
 
-export const playAudio = () => {
-  const playButtons = document.querySelectorAll(`.player-control`);
-  [...playButtons].forEach((btn) => {
-    const audio = btn.previousElementSibling;
-    btn.addEventListener(`click`, () => {
-      if (audio.paused) {
-        audio.play();
-        btn.classList.add(`.player-control--pause`);
-      } else {
-        audio.pause();
-        btn.classList.remove(`.player-control--pause`);
-      }
-    });
-  });
-};
+// export const playAudio = () => {
+//   const playButtons = document.querySelectorAll(`.player-control`);
+//   [...playButtons].forEach((btn) => {
+//     const audio = btn.previousElementSibling;
+//     btn.addEventListener(`click`, () => {
+//       if (audio.paused) {
+//         audio.play();
+//         btn.classList.add(`.player-control--pause`);
+//       } else {
+//         audio.pause();
+//         btn.classList.remove(`.player-control--pause`);
+//       }
+//     });
+//   });
+// };

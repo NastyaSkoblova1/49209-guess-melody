@@ -1,5 +1,6 @@
-import {createElement, playAudio} from './util.js';
-import {levels, scoreVariables, changeLevel} from './data.js';
+import {createElement} from './util.js';
+import {levels} from './data.js';
+import {calculateResult, showResult} from './gameplay.js';
 import renderHeader from './header.js';
 
 const renderArtistVariants = (level) => {
@@ -7,7 +8,7 @@ const renderArtistVariants = (level) => {
   ${[...level.answers].map((answer, i) => `
   <div class="main-answer-wrapper">
     <input class="main-answer-r" type="radio" id="answer-${i + 1}" name="answer" value="val-${i + 1}"/>
-    <label class="main-answer" for="answer-${i + 1}">
+    <label class="main-answer" data-id="${answer.id}" for="answer-${i + 1}">
       <img class="main-answer-preview" src="${answer.image}"
             alt="${answer.artist}" width="134" height="134">
       ${answer.artist}
@@ -37,22 +38,11 @@ const levelArtistElementTemplate = (level) => `
 const levelArtistElement = (data) => {
   const levelArtist = createElement(levelArtistElementTemplate(levels[data.level]));
   const mainAnswers = levelArtist.querySelectorAll(`.main-answer`);
-  playAudio();
 
   [...mainAnswers].forEach((mainAnswer) => {
     mainAnswer.addEventListener(`click`, () => {
-      if (mainAnswer.innerText === levels[data.level].rightAnswer) {
-        data.score += scoreVariables.SLOW_AND_CORRECT;
-      } else {
-        data.notes += 1;
-      }
-
-      if (data.notes < 3) {
-        changeLevel(levels[data.level++].type);
-      } else {
-        changeLevel();
-      }
-
+      calculateResult(mainAnswer);
+      showResult();
     });
   });
 
