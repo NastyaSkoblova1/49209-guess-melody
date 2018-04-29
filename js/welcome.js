@@ -1,7 +1,7 @@
 import {createElement, renderScreen} from './util.js';
 import {initialState} from './data.js';
 import renderLogo from './logo.js';
-import levelArtistElement from './module-level-artist.js';
+import levelArtistElement from './level-artist.js';
 
 const welcomeElementTemplate = `
   <section class="main main--welcome">
