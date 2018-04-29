@@ -1,192 +1,285 @@
+export const otherInitialState = [
+  {
+    score: 18,
+    notes: 2,
+    time: 5
+  },
+  {
+    score: 5,
+    notes: 2,
+    time: 0
+  },
+  {
+    score: 12,
+    notes: 1,
+    time: 15
+  },
+  {
+    score: -5,
+    notes: 1,
+    time: 10
+  }
+];
+
+export const scoreConst = {
+  REQUIRED_ANSWERS_AMOUNT: 10,
+  TIME_LIMIT: 30,
+  FAST_AND_CORRECT: 2,
+  SLOW_AND_CORRECT: 1,
+  WRONG: -2
+};
+
 export const initialState = {
   level: 1,
+  score: 0,
   notes: 0,
-  time: 300
+  time: 300,
+  fastAnswer: 0
 };
 
 export const levels = {
-  'level-1': {
+  1: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+    rightAnswer: 1,
     answers: [
       {
+        id: 1,
         artist: `Audionautix`,
         image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`
       },
       {
+        id: 2,
         artist: `Riot`,
         image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
       },
       {
+        id: 3,
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
       }
     ]
   },
-  'level-2': {
+  2: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+    rightAnswer: 1,
     answers: [
       {
+        id: 1,
         artist: `Kevin MacLeod`,
         image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`
       },
       {
+        id: 2,
         artist: `Riot`,
         image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
       },
       {
+        id: 3,
         artist: `Jingle Punks`,
         image: `https://i.vimeocdn.com/portrait/992615_300x300`
       }
     ]
   },
-  'level-3': {
+  3: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+    rightAnswer: 2,
     answers: [
       {
+        id: 1,
         artist: `Jingle Punks`,
         image: `https://i.vimeocdn.com/portrait/992615_300x300`
       },
       {
+        id: 2,
         artist: `Riot`,
         image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
       },
       {
+        id: 3,
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
       }
     ]
   },
-  'level-4': {
+  4: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+    rightAnswer: 3,
     answers: [
       {
-        artist: `Jingle Punks`,
-        image: `https://i.vimeocdn.com/portrait/992615_300x300`
+        id: 1,
+        artist: `Kevin MacLeod`,
+        image: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`
       },
       {
-        artist: `Riot`,
-        image: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`
-      },
-      {
+        id: 2,
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
+      },
+      {
+        id: 3,
+        artist: `Jingle Punks`,
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`
       }
     ]
   },
-  'level-5': {
+  5: {
     type: `artist`,
     src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+    rightAnswer: 2,
     answers: [
       {
+        id: 1,
         artist: `Audionautix`,
         image: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`
       },
       {
+        id: 2,
         artist: `Jingle Punks`,
-        images: `https://i.vimeocdn.com/portrait/992615_300x300`
+        image: `https://i.vimeocdn.com/portrait/992615_300x300`
       },
       {
+        id: 3,
         artist: `Gunnar Olsen`,
         image: `https://f4.bcbits.com/img/0004181452_10.jpg`
       },
     ]
   },
-  'level-6': {
+  6: {
     type: `genre`,
     question: `Выберите электронные треки`,
-    genre: `Electronic`,
+    rightAnswer: 3,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `Electronic`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       }
     ]
   },
-  'level-7': {
+  7: {
     type: `genre`,
     question: `Выберите джаз треки`,
-    genre: `Jazz`,
+    rightAnswer: 2,
     answers: [
       {
-        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-      },
-      {
-        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
-      },
-      {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`
       },
       {
+        id: 2,
+        src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+        genre: `Jazz`
+      },
+      {
+        id: 3,
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
+      },
+      {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       }
     ]
   },
-  'level-8': {
+  8: {
     type: `genre`,
     question: `Выберите поп треки`,
-    genre: `Pop`,
+    rightAnswer: 1,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+        genre: `Jazz`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       }
     ]
   },
-  'level-9': {
+  9: {
     type: `genre`,
     question: `Выберите рок треки`,
-    genre: `Rock`,
+    rightAnswer: 2,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       }
     ]
   },
-  'level-10': {
+  10: {
     type: `genre`,
     question: `Выберите кантри треки`,
-    genre: `Country`,
+    rightAnswer: 3,
     answers: [
       {
+        id: 1,
         src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
+        id: 2,
         src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`
       },
       {
+        id: 3,
         src: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`
       },
       {
+        id: 4,
         src: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`
       }
     ]
   }

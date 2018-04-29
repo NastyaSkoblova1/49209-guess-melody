@@ -1,8 +1,11 @@
-import {createElement, changeView} from './util.js';
+import {createElement, renderScreen} from './util.js';
+import {initialState} from './data.js';
+import renderLogo from './logo.js';
 import levelArtistElement from './module-level-artist.js';
 
 const welcomeElementTemplate = `
-  <section class="main main--welcome"><section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
+  <section class="main main--welcome">
+  	${renderLogo()}
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
     <p class="text main-text">
@@ -14,7 +17,7 @@ const welcomeElementTemplate = `
 const welcomeElement = createElement(welcomeElementTemplate);
 const buttonPlay = welcomeElement.querySelector(`button.main-play`);
 const changeScreenOnLevelArtist = () => {
-  changeView(levelArtistElement);
+  renderScreen(levelArtistElement(initialState));
 };
 
 buttonPlay.addEventListener(`click`, changeScreenOnLevelArtist);

@@ -1,118 +1,72 @@
-import {createElement, changeView} from './util.js';
-import resultElement from './module-result.js';
-import resultEffortsElement from './module-result-efforts.js';
-import resultTimeElement from './module-result-time.js';
+import {createElement, playAudio} from './util.js';
+import {levels} from './data.js';
+import {calculateResult, showResult} from './gameplay.js';
+import renderHeader from './header.js';
 
-const levelGenreElementTemplate = `
-  <section class="main main--level main--level-genre"><svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
-      <circle
-        cx="390" cy="390" r="370"
-        class="timer-line"
-        style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
+const renderGenreQuestion = (level) => {
+  return `
+    <h2 class="title">${level.question}</h2>`;
+};
 
-      <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
-        <span class="timer-value-mins">05</span><!--
-        --><span class="timer-value-dots">:</span><!--
-        --><span class="timer-value-secs">00</span>
-      </div>
-    </svg>
-    <div class="main-mistakes">
-      <img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">
-      <img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">
-      <img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">
-    </div>
+const renderGenreVariants = (level) => {
+  return `
+  <form class="genre">
+    ${[...level.answers].map((answer, i) => `
+      <div class="genre-answer">
+        <div class="player-wrapper">
+          <div class="player">
+            <audio src="${answer.src}"></audio>
+            <button class="player-control player-control--pause player-control--play" type="button"></button>
+            <div class="player-track">
+              <span class="player-status"></span>
+            </div>
+          </div>
+        </div>
+        <input type="checkbox" name="answer" value="${answer.genre}" id="a-${i + 1}" data-id="${answer.id}">
+        <label class="genre-answer-check" for="a-${i + 1}"></label>
+      </div>`).join(``)}
+    <button class="genre-answer-send" type="submit">Ответить</button>
+  </form>`;
+};
 
+const levelGenreElementTemplate = (level) => `
+  <section class="main main--level main--level-genre">
+    ${renderHeader()}
     <div class="main-wrap">
-      <h2 class="title">Выберите инди-рок треки</h2>
-      <form class="genre">
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio></audio>
-              <button class="player-control player-control--pause"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-1">
-          <label class="genre-answer-check" for="a-1"></label>
-        </div>
+      ${renderGenreQuestion(level)}
+      ${renderGenreVariants(level)}
+    </div>
+  </section>`;
 
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-2">
-          <label class="genre-answer-check" for="a-2"></label>
-        </div>
+const levelGenreElement = (data) => {
+  const levelGenre = createElement(levelGenreElementTemplate(levels[data.level]));
+  const buttonGenreAnswer = levelGenre.querySelector(`.genre-answer-send`);
+  const answerCheck = levelGenre.querySelectorAll(`.genre-answer input`);
+  const form = levelGenre.querySelector(`.genre`);
+  const answerCheckArray = [...answerCheck];
+  buttonGenreAnswer.disabled = true;
 
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-3">
-          <label class="genre-answer-check" for="a-3"></label>
-        </div>
+  const checkAnswer = () => answerCheckArray.some((element) => element.checked);
 
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-4">
-          <label class="genre-answer-check" for="a-4"></label>
-        </div>
+  const removeDisabledFromButton = () => {
+    buttonGenreAnswer.disabled = !checkAnswer();
+  };
 
-        <button class="genre-answer-send" type="submit">Ответить</button>
-      </form>
-    </div></section>`;
+  form.addEventListener(`change`, () => {
+    removeDisabledFromButton();
+  });
 
-const levelGenreElement = createElement(levelGenreElementTemplate);
-const buttonGenreAnswer = levelGenreElement.querySelector(`.genre-answer-send`);
-const playerControl = levelGenreElement.querySelectorAll(`.player-control`);
-const answerCheck = levelGenreElement.querySelectorAll(`.genre-answer input`);
-const form = levelGenreElement.querySelector(`.genre`);
-const resultDisplayArr = [resultElement, resultEffortsElement, resultTimeElement];
-const playerControlArray = [...playerControl];
-const answerCheckArray = [...answerCheck];
-buttonGenreAnswer.disabled = true;
+  form.addEventListener(`submit`, () => {
+    const answersChecked = document.querySelectorAll(`.genre-answer input:checked`);
+    [...answersChecked].forEach((answerChecked) => {
+      calculateResult(answerChecked);
+    });
+    showResult();
+  });
 
-playerControlArray.forEach((element) => {
-  element.disabled = true;
-});
+  playAudio(form);
 
-const getNumberOfResultDisplay = () => Math.floor(Math.random() * resultDisplayArr.length);
-
-const checkAnswer = () => answerCheckArray.some((element) => element.checked);
-
-const removeDisabledFromButton = () => {
-  buttonGenreAnswer.disabled = !checkAnswer();
+  return levelGenre;
 };
-
-const changeScreenOnResult = (e) => {
-  e.preventDefault();
-  changeView(resultDisplayArr[getNumberOfResultDisplay()]);
-};
-
-form.addEventListener(`change`, removeDisabledFromButton);
-form.addEventListener(`submit`, changeScreenOnResult);
 
 export default levelGenreElement;
