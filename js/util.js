@@ -12,24 +12,30 @@ export const renderScreen = (element) => {
 };
 
 export const playAudio = (players) => {
-  const audioItems = players.querySelectorAll(`audio`);
-  const audioArr = [...audioItems];
-  audioArr[0].setAttribute(`autoplay`, true);
-  audioArr.forEach((audio, i) => {
-    const buttonPlay = audio.nextElementSibling;
+  const audioPlayers = [...players.querySelectorAll(`audio`)];
+  const buttons = [...players.querySelectorAll(`.player-control`)];
+  audioPlayers[0].setAttribute(`autoplay`, true);
+  buttons.forEach((btn, i) => {
+    const audioPlayer = btn.previousElementSibling;
 
     if (i !== 0) {
-      buttonPlay.classList.remove(`player-control--pause`);
+      btn.classList.remove(`player-control--pause`);
     }
 
-    buttonPlay.addEventListener(`click`, () => {
-      if (audio.paused) {
-        audio.play();
-        buttonPlay.classList.add(`player-control--pause`);
+    btn.addEventListener(`click`, (event) => {
+      if (audioPlayer.paused) {
+        audioPlayers.forEach((audio) => {
+          audio.pause();
+          audio.nextElementSibling.classList.remove(`player-control--pause`);
+        });
+        audioPlayer.play();
+        btn.classList.add(`player-control--pause`);
       } else {
-        audio.pause();
-        buttonPlay.classList.remove(`player-control--pause`);
+        audioPlayer.pause();
+        btn.classList.remove(`player-control--pause`);
       }
+
+      event.preventDefault();
     });
   });
 };

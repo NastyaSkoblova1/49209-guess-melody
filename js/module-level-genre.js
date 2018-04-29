@@ -16,7 +16,7 @@ const renderGenreVariants = (level) => {
         <div class="player-wrapper">
           <div class="player">
             <audio src="${answer.src}"></audio>
-            <button class="player-control player-control--pause player-control--play"></button>
+            <button class="player-control player-control--pause player-control--play" type="button"></button>
             <div class="player-track">
               <span class="player-status"></span>
             </div>
