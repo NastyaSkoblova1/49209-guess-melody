@@ -1,4 +1,4 @@
-import {createElement} from './util.js';
+import {createElement, playAudio} from './util.js';
 import {levels} from './data.js';
 import {calculateResult, showResult} from './gameplay.js';
 import renderHeader from './header.js';
@@ -61,9 +61,10 @@ const levelGenreElement = (data) => {
     [...answersChecked].forEach((answerChecked) => {
       calculateResult(answerChecked);
     });
-
     showResult();
   });
+
+  playAudio(form);
 
   return levelGenre;
 };

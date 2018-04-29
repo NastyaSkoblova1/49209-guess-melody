@@ -11,18 +11,25 @@ export const renderScreen = (element) => {
   main.appendChild(element);
 };
 
-// export const playAudio = () => {
-//   const playButtons = document.querySelectorAll(`.player-control`);
-//   [...playButtons].forEach((btn) => {
-//     const audio = btn.previousElementSibling;
-//     btn.addEventListener(`click`, () => {
-//       if (audio.paused) {
-//         audio.play();
-//         btn.classList.add(`.player-control--pause`);
-//       } else {
-//         audio.pause();
-//         btn.classList.remove(`.player-control--pause`);
-//       }
-//     });
-//   });
-// };
+export const playAudio = (players) => {
+  const audioItems = players.querySelectorAll(`audio`);
+  const audioArr = [...audioItems];
+  audioArr[0].setAttribute(`autoplay`, true);
+  audioArr.forEach((audio, i) => {
+    const buttonPlay = audio.nextElementSibling;
+
+    if (i !== 0) {
+      buttonPlay.classList.remove(`player-control--pause`);
+    }
+
+    buttonPlay.addEventListener(`click`, () => {
+      if (audio.paused) {
+        audio.play();
+        buttonPlay.classList.add(`player-control--pause`);
+      } else {
+        audio.pause();
+        buttonPlay.classList.remove(`player-control--pause`);
+      }
+    });
+  });
+};

@@ -33,7 +33,8 @@ export const initialState = {
   level: 1,
   score: 0,
   notes: 0,
-  time: 300
+  time: 300,
+  fastAnswer: 0
 };
 
 export const levels = {
@@ -181,8 +182,8 @@ export const levels = {
     answers: [
       {
         id: 1,
-        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-        genre: `Pop`
+        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`
       },
       {
         id: 2,
@@ -191,8 +192,8 @@ export const levels = {
       },
       {
         id: 3,
-        src: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
-        genre: `Rock`
+        src: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
       },
       {
         id: 4,

@@ -1,4 +1,4 @@
-import {createElement} from './util.js';
+import {createElement, playAudio} from './util.js';
 import {levels} from './data.js';
 import {calculateResult, showResult} from './gameplay.js';
 import renderHeader from './header.js';
@@ -23,7 +23,7 @@ const levelArtistElementTemplate = (level) => `
     <h2 class="title main-title">Кто исполняет эту песню?</h2>
     <div class="player-wrapper">
       <div class="player">
-        <audio src="${level.src}" autoplay></audio>
+        <audio src="${level.src}"></audio>
         <button class="player-control player-control--pause"></button>
         <div class="player-track">
           <span class="player-status"></span>
@@ -38,6 +38,7 @@ const levelArtistElementTemplate = (level) => `
 const levelArtistElement = (data) => {
   const levelArtist = createElement(levelArtistElementTemplate(levels[data.level]));
   const mainAnswers = levelArtist.querySelectorAll(`.main-answer`);
+  const playerWrapper = levelArtist.querySelector(`.player-wrapper`);
 
   [...mainAnswers].forEach((mainAnswer) => {
     mainAnswer.addEventListener(`click`, () => {
@@ -45,6 +46,8 @@ const levelArtistElement = (data) => {
       showResult();
     });
   });
+
+  playAudio(playerWrapper);
 
   return levelArtist;
 };

@@ -3,6 +3,7 @@ import levelArtistElement from './module-level-artist.js';
 import levelGenreElement from './module-level-genre.js';
 import resultElement from './module-result.js';
 import resultEffortsElement from './module-result-efforts.js';
+import resultTimeElement from './module-result-time.js';
 import {otherInitialState, initialState, levels, scoreConst} from './data.js';
 
 
@@ -43,11 +44,19 @@ export const changeLevel = (levelType) => {
   if (initialState.level >= 10) {
     renderScreen(resultElement(initialState, compareResult()));
     restartGame();
+    return;
+  }
+
+  if (initialState.time === 0) {
+    renderScreen(resultTimeElement(initialState));
+    restartGame();
+    return;
   }
 
   if (initialState.notes === 3) {
     renderScreen(resultEffortsElement(initialState));
     restartGame();
+    return;
   }
 
   switch (levelType) {
@@ -70,7 +79,8 @@ export const calculateResult = (answer) => {
 
 export const showResult = () => {
   if (initialState.notes < 3) {
-    changeLevel(levels[initialState.level++].type);
+    initialState.level++;
+    changeLevel(levels[initialState.level].type);
   } else {
     changeLevel();
   }
