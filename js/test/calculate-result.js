@@ -15,10 +15,7 @@ export const calculateResult = (answers, notes) => {
       rightAnswer += element.time >= TIME_LIMIT ? SLOW_AND_CORRECT : FAST_AND_CORRECT;
     } else {
       rightAnswer += WRONG;
-
-      if (notes > 0) {
-        notes = notes - 1;
-      }
+      notes = notes + 1;
     }
 
     if (element.time < 0) {
