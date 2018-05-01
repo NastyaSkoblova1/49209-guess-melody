@@ -1,16 +1,15 @@
+import {playAudio} from './util.js';
 import AbstractView from './abstract-view';
 
 export default class ArtistView extends AbstractView {
-  constructor(header, variants, level) {
+  constructor(level) {
     super();
-    this.header = header;
     this.level = level;
   }
 
   get template() {
     return `
       <section class="main main--level main--level-artist">
-        ${this.header}
         <div class="main-wrap">
           <h2 class="title main-title">Кто исполняет эту песню?</h2>
           <div class="player-wrapper">
@@ -39,12 +38,15 @@ export default class ArtistView extends AbstractView {
 
   bind() {
     const mainAnswers = this.element.querySelectorAll(`.main-answer`);
+    const playerWrapper = this.element.querySelector(`.player-wrapper`);
 
     [...mainAnswers].forEach((mainAnswer) => {
       mainAnswer.addEventListener(`click`, () => {
         this.onAnswerClick(mainAnswer);
       });
     });
+
+    playAudio(playerWrapper);
   }
 
   onAnswerClick(answer) {}

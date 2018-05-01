@@ -11,6 +11,11 @@ export const renderScreen = (element) => {
   main.appendChild(element);
 };
 
+export const updateScreen = (parent, view) => {
+  parent.innerHTML = ``;
+  parent.appendChild(view.element);
+};
+
 export const playAudio = (players) => {
   const audioPlayers = [...players.querySelectorAll(`audio`)];
   const buttons = [...players.querySelectorAll(`.player-control`)];

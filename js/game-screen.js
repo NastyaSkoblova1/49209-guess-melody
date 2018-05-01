@@ -1,21 +1,15 @@
-import GenreView from './genre-view.js';
-import ArtistView from './artist-view.js';
+import {initialState, levels} from './data.js';
 import {calculateResult, showResult} from './gameplay.js';
+import ArtistView from './artist-view.js';
 
-export default () => {
-  const artist = new ArtistView();
-  const genre = new GenreView();
+let gameState = Object.assign({}, initialState);
+const artist = new ArtistView(levels[gameState.level]);
 
-  genre.onFormSubmit = () => {
-    const answersChecked = document.querySelectorAll(`.genre-answer input:checked`);
-    [...answersChecked].forEach((answerChecked) => {
-      calculateResult(answerChecked);
-    });
-    showResult();
-  };
+const gameContainerElement = artist.render();
 
-  artist.onAnswerClick = (answer) => {
-    calculateResult(answer);
-    showResult();
-  };
+artist.onAnswerClick = (answer) => {
+  showResult(answer);
+  calculateResult();
 };
+
+export default gameContainerElement;
