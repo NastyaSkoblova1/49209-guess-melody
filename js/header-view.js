@@ -21,13 +21,9 @@ export default class HeaderView extends AbstractView {
         </div>
       </svg>
       <div class="main-mistakes">
-        ${new Array(this.state.notes)
+        ${this.state.notes
       .fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`)
       .join(``)}
       </div>`;
-  }
-
-  bind() {
-
   }
 }

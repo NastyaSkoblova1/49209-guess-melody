@@ -1,6 +1,10 @@
 import AbstractView from './abstract-view';
 
 export default class WelcomeView extends AbstractView {
+  constructor() {
+    super();
+  }
+
   get template() {
     return `
       <section class="main main--welcome">
@@ -22,7 +26,5 @@ export default class WelcomeView extends AbstractView {
     });
   }
 
-  onStartClick() {
-
-  }
+  onStartClick() {}
 }

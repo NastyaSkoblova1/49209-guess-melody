@@ -48,11 +48,7 @@ export default class GenreView extends AbstractView {
     });
   }
 
-  onFormChange() {
+  onFormChange() {}
 
-  }
-
-  onFormSubmit() {
-
-  }
+  onFormSubmit() {}
 }

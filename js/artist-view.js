@@ -47,7 +47,5 @@ export default class ArtistView extends AbstractView {
     });
   }
 
-  onAnswerClick() {
-
-  }
+  onAnswerClick() {}
 }

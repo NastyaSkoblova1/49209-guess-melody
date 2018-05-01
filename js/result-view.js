@@ -28,7 +28,5 @@ export default class ResultView extends AbstractView {
     });
   }
 
-  onRestartClick() {
-
-  }
+  onRestartClick() {}
 }
