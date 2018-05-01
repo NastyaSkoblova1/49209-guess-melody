@@ -42,10 +42,10 @@ export default class ArtistView extends AbstractView {
 
     [...mainAnswers].forEach((mainAnswer) => {
       mainAnswer.addEventListener(`click`, () => {
-        this.onAnswerClick();
+        this.onAnswerClick(mainAnswer);
       });
     });
   }
 
-  onAnswerClick() {}
+  onAnswerClick(answer) {}
 }
