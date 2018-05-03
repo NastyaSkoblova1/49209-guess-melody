@@ -6,9 +6,9 @@ export const createElement = (template) => {
   return outer.firstElementChild;
 };
 
-export const renderScreen = (element) => {
+export const renderScreen = (view) => {
   main.innerHTML = ``;
-  main.appendChild(element);
+  main.appendChild(view.element);
 };
 
 export const updateScreen = (parent, view) => {

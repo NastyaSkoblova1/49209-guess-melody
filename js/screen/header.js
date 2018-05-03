@@ -1,4 +1,4 @@
-import {initialState} from './data.js';
+import {initialState} from '../data.js';
 
 export default () => {
   return `

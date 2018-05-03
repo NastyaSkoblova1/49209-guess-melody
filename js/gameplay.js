@@ -1,9 +1,9 @@
 import {renderScreen} from './util.js';
-import levelArtistElement from './artist.js';
-import levelGenreElement from './genre.js';
-import resultElement from './result.js';
-import resultEffortsElement from './result-efforts.js';
-import resultTimeElement from './result-time.js';
+import levelArtistElement from './screen/artist.js';
+import levelGenreElement from './screen/genre.js';
+import resultElement from './screen/result.js';
+import resultEffortsElement from './screen/result-efforts.js';
+import resultTimeElement from './screen/result-time.js';
 import {otherInitialState, initialState, levels, scoreConst} from './data.js';
 
 

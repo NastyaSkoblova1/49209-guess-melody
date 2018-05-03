@@ -1,4 +1,4 @@
-import {playAudio} from './util.js';
+import {playAudio} from '../util.js';
 import AbstractView from './abstract-view';
 
 export default class ArtistView extends AbstractView {
@@ -48,6 +48,11 @@ export default class ArtistView extends AbstractView {
 
     playAudio(playerWrapper);
   }
+
+  /**
+   * Обработка ответов пользователя
+   * @param {string} answer - Элемент с ответом пользователя
+   */
 
   onAnswerClick(answer) {}
 }

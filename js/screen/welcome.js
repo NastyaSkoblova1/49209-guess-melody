@@ -1,5 +1,5 @@
-import {createElement, renderScreen} from './util.js';
-import {initialState} from './data.js';
+import {createElement, renderScreen} from '../util.js';
+import {initialState} from '../data.js';
 import renderLogo from './logo.js';
 import levelArtistElement from './artist.js';
 

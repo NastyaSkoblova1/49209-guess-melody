@@ -1,6 +1,6 @@
-import {createElement, playAudio} from './util.js';
-import {levels} from './data.js';
-import {calculateResult, showResult} from './gameplay.js';
+import {createElement, playAudio} from '../util.js';
+import {levels} from '../data.js';
+import {calculateResult, showResult} from '../gameplay.js';
 import renderHeader from './header.js';
 
 const renderArtistVariants = (level) => {

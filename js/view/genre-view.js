@@ -1,9 +1,8 @@
 import AbstractView from './abstract-view';
 
 export default class GenreView extends AbstractView {
-  constructor(header, variants, level) {
+  constructor(level) {
     super();
-    this.header = header;
     this.level = level;
   }
 
