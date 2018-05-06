@@ -9,7 +9,6 @@ export default class GenreView extends AbstractView {
   get template() {
     return `
       <section class="main main--level main--level-genre">
-        ${this.header}
         <div class="main-wrap">
           <h2 class="title">${this.level.question}</h2>
           <form class="genre">
@@ -36,18 +35,31 @@ export default class GenreView extends AbstractView {
   bind() {
     const buttonGenreAnswer = this.element.querySelector(`.genre-answer-send`);
     const form = this.element.querySelector(`.genre`);
+    const answerCheck = this.element.querySelectorAll(`.genre-answer input`);
+    const answerCheckArray = [...answerCheck];
     buttonGenreAnswer.disabled = true;
 
+    const checkAnswer = () => answerCheckArray.some((element) => element.checked);
+    const removeDisabledFromButton = () => {
+      buttonGenreAnswer.disabled = !checkAnswer();
+    };
+
     form.addEventListener(`change`, () => {
-      this.onFormChange();
+      removeDisabledFromButton();
     });
 
-    form.addEventListener(`submit`, () => {
-      this.onFormSubmit();
+    form.addEventListener(`submit`, (e) => {
+      e.preventDefault();
+      const answersChecked = document.querySelectorAll(`.genre-answer input:checked`);
+      [...answersChecked].forEach((answerChecked) => {
+        this.onAnswer(answerChecked);
+      });
     });
   }
 
-  onFormChange() {}
-
-  onFormSubmit() {}
+  /**
+   * Обработка ответов пользователя
+   * @param {string} answer  Элемент с ответом пользователя
+   */
+  onAnswer(answer) {}
 }

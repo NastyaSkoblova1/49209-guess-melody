@@ -22,7 +22,7 @@ export const otherInitialState = [
 ];
 
 export const scoreConst = {
-  REQUIRED_ANSWERS_AMOUNT: 10,
+  LEVELS_AMOUNT: 10,
   TIME_LIMIT: 30,
   FAST_AND_CORRECT: 2,
   SLOW_AND_CORRECT: 1,

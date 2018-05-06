@@ -1,12 +1,19 @@
-import {initialState, otherInitialState, levels, scoreConst} from './data.js';
-import {renderScreen} from './util.js';
+import {otherInitialState, initialState, levels, scoreConst} from './data.js';
+import {renderScreen, createElement, updateScreen} from './util.js';
 import ArtistView from './view/artist-view.js';
 import GenreView from './view/genre-view.js';
 import ResultView from './view/result-view.js';
-import ResultTimeView from './view/result-time-view.js';
 import ResultEffortsView from './view/result-efforts-view.js';
 
 let gameState = Object.assign({}, initialState);
+
+const calculateResult = (answer) => {
+  if (+answer.getAttribute(`data-id`) === levels[gameState.level].rightAnswer) {
+    gameState.score += scoreConst.SLOW_AND_CORRECT;
+  } else {
+    gameState.notes += 1;
+  }
+};
 
 const compareResult = () => {
   const scores = otherInitialState.map((it) => it.score);
@@ -17,8 +24,9 @@ const compareResult = () => {
   });
 
   const amountOfPlayers = scores.length;
-  const ourPlace = scores.indexOf(initialState.score) + 1;
+  const ourPlace = scores.indexOf(gameState.score) + 1;
   const ourPercent = (amountOfPlayers - ourPlace) / amountOfPlayers * 100;
+
 
   const resultState = {
     players: amountOfPlayers,
@@ -36,75 +44,38 @@ const restartGame = () => {
     gameState.score = 0;
     gameState.notes = 0;
     gameState.time = 300;
-    renderScreen(artist);
+    const artist = new ArtistView(levels[gameState.level]);
+    renderScreen(artist.element);
+    artist.onAnswer = onUserAnswer;
   });
 };
 
-const artist = new ArtistView(levels[gameState.level]);
-const genre = new GenreView(levels[gameState.level]);
-const result = new ResultView(gameState, compareResult());
-const resultTime = new ResultTimeView();
-const resultEfforts = new ResultEffortsView();
+const gameContainerElement = createElement();
+const levelContainerElement = createElement();
 
-const changeLevel = (levelType) => {
-  if (gameState.level >= 10) {
-    renderScreen(result);
-    restartGame();
-    return;
-  }
+gameContainerElement.appendChild(levelContainerElement);
 
-  if (gameState.time === 0) {
-    renderScreen(resultTime);
-    restartGame();
-    return;
-  }
-
-  if (gameState.notes === 3) {
-    renderScreen(resultEfforts);
-    restartGame();
-    return;
-  }
-
-  let gameLevel;
-
-  switch (levelType) {
-    case `artist`:
-      gameLevel = artist;
-      break;
-    case `genre`:
-      gameLevel = genre;
-      break;
-  }
-
-  renderScreen(gameLevel);
-};
-
-const calculateResult = (answer) => {
-  if (+answer.getAttribute(`data-id`) === levels[gameState.level].rightAnswer) {
-    gameState.score += scoreConst.SLOW_AND_CORRECT;
-  } else {
-    gameState.notes += 1;
-  }
-};
-
-const showResult = () => {
-  if (gameState.notes < 3) {
-    gameState.level++;
-    changeLevel(levels[gameState.level].type);
-  } else {
-    changeLevel();
-  }
-};
-
-const gameContainerElement = artist;
-
-artist.onAnswerClick = (answer) => {
-  showResult();
+const onUserAnswer = (answer) => {
   calculateResult(answer);
+  gameState.level++;
+
+  if (gameState.level > scoreConst.LEVELS_AMOUNT) {
+    renderScreen(new ResultView(gameState, compareResult()).element);
+    restartGame();
+  } else if (gameState.notes > 2) {
+    renderScreen(new ResultEffortsView().element);
+    restartGame();
+  } else {
+    updateGame(gameState);
+  }
 };
 
-genre.onFormChange = () => {};
+const updateGame = (state) => {
+  const level = levels[state.level].type === `artist` ? new ArtistView(levels[state.level]) : new GenreView(levels[state.level]);
+  level.onAnswer = onUserAnswer;
+  updateScreen(levelContainerElement, level);
+};
 
-genre.onFormSubmit = () => {};
+updateGame(gameState);
 
 export default gameContainerElement;

@@ -22,7 +22,7 @@ export default class ResultView extends AbstractView {
   }
 
   bind() {
-    const buttonRestart = this.element.querySelector(`button.main-replay`);
+    const buttonRestart = this.element.querySelector(`.main-replay`);
     buttonRestart.addEventListener(`click`, () => {
       this.onRestartClick();
     });

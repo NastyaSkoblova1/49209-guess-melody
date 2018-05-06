@@ -41,8 +41,9 @@ export default class ArtistView extends AbstractView {
     const playerWrapper = this.element.querySelector(`.player-wrapper`);
 
     [...mainAnswers].forEach((mainAnswer) => {
-      mainAnswer.addEventListener(`click`, () => {
-        this.onAnswerClick(mainAnswer);
+      mainAnswer.addEventListener(`click`, (e) => {
+        e.preventDefault();
+        this.onAnswer(mainAnswer);
       });
     });
 
@@ -51,8 +52,7 @@ export default class ArtistView extends AbstractView {
 
   /**
    * Обработка ответов пользователя
-   * @param {string} answer - Элемент с ответом пользователя
+   * @param {string} answer  Элемент с ответом пользователя
    */
-
-  onAnswerClick(answer) {}
+  onAnswer(answer) {}
 }
