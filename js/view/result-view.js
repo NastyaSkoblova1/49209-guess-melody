@@ -20,13 +20,4 @@ export default class ResultView extends AbstractView {
         <span role="button" tabindex="0" class="main-replay">Сыграть ещё раз</span>
       </section>`;
   }
-
-  bind() {
-    const buttonRestart = this.element.querySelector(`.main-replay`);
-    buttonRestart.addEventListener(`click`, () => {
-      this.onRestartClick();
-    });
-  }
-
-  onRestartClick() {}
 }

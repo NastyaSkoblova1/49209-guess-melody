@@ -52,7 +52,7 @@ export default class ArtistView extends AbstractView {
 
   /**
    * Обработка ответов пользователя
-   * @param {string} answer  Элемент с ответом пользователя
+   * @param {string} answer Элемент с ответом пользователя
    */
   onAnswer(answer) {}
 }

@@ -1,3 +1,4 @@
+import {playAudio} from '../util.js';
 import AbstractView from './abstract-view';
 
 export default class GenreView extends AbstractView {
@@ -55,11 +56,13 @@ export default class GenreView extends AbstractView {
         this.onAnswer(answerChecked);
       });
     });
+
+    playAudio(form);
   }
 
   /**
    * Обработка ответов пользователя
-   * @param {string} answer  Элемент с ответом пользователя
+   * @param {string} answer Элемент с ответом пользователя
    */
   onAnswer(answer) {}
 }

@@ -1,11 +1,20 @@
-import {otherInitialState, initialState, levels, scoreConst} from './data.js';
+import {otherInitialState, initialState, levels, scoreConst} from './data/data.js';
 import {renderScreen, createElement, updateScreen} from './util.js';
+import HeaderView from './view/header-view.js';
 import ArtistView from './view/artist-view.js';
 import GenreView from './view/genre-view.js';
 import ResultView from './view/result-view.js';
 import ResultEffortsView from './view/result-efforts-view.js';
 
 let gameState = Object.assign({}, initialState);
+
+const gameContainer = createElement();
+const headerContainer = createElement();
+const levelContainer = createElement();
+
+gameContainer.appendChild(headerContainer);
+gameContainer.appendChild(levelContainer);
+
 
 const calculateResult = (answer) => {
   if (+answer.getAttribute(`data-id`) === levels[gameState.level].rightAnswer) {
@@ -26,7 +35,6 @@ const compareResult = () => {
   const amountOfPlayers = scores.length;
   const ourPlace = scores.indexOf(gameState.score) + 1;
   const ourPercent = (amountOfPlayers - ourPlace) / amountOfPlayers * 100;
-
 
   const resultState = {
     players: amountOfPlayers,
@@ -50,11 +58,6 @@ const restartGame = () => {
   });
 };
 
-const gameContainerElement = createElement();
-const levelContainerElement = createElement();
-
-gameContainerElement.appendChild(levelContainerElement);
-
 const onUserAnswer = (answer) => {
   calculateResult(answer);
   gameState.level++;
@@ -71,11 +74,12 @@ const onUserAnswer = (answer) => {
 };
 
 const updateGame = (state) => {
+  updateScreen(headerContainer, new HeaderView(state));
   const level = levels[state.level].type === `artist` ? new ArtistView(levels[state.level]) : new GenreView(levels[state.level]);
   level.onAnswer = onUserAnswer;
-  updateScreen(levelContainerElement, level);
+  updateScreen(levelContainer, level);
 };
 
 updateGame(gameState);
 
-export default gameContainerElement;
+export default gameContainer;
