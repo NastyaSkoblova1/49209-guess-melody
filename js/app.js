@@ -45,29 +45,25 @@ const compareResult = () => {
   return resultState;
 };
 
-const restartGame = () => {
-  const restartBtn = document.querySelector(`.main-replay`);
-  restartBtn.addEventListener(`click`, () => {
-    gameState.level = 1;
-    gameState.score = 0;
-    gameState.notes = 0;
-    gameState.time = 300;
-    const artist = new ArtistView(levels[gameState.level]);
-    renderScreen(artist.element);
-    artist.onAnswer = onUserAnswer;
-  });
+const onUserRestart = () => {
+  gameState = Object.assign({}, initialState);
+  renderScreen(gameContainer);
+  updateGame(gameState);
 };
 
 const onUserAnswer = (answer) => {
+  let result;
   calculateResult(answer);
   gameState.level++;
 
   if (gameState.level > scoreConst.LEVELS_AMOUNT) {
-    renderScreen(new ResultView(gameState, compareResult()).element);
-    restartGame();
+    result = new ResultView(gameState, compareResult());
+    renderScreen(result.element);
+    result.onRestart = onUserRestart;
   } else if (gameState.notes > 2) {
-    renderScreen(new ResultEffortsView().element);
-    restartGame();
+    result = new ResultEffortsView();
+    renderScreen(result.element);
+    result.onRestart = onUserRestart;
   } else {
     updateGame(gameState);
   }
@@ -75,11 +71,14 @@ const onUserAnswer = (answer) => {
 
 const updateGame = (state) => {
   updateScreen(headerContainer, new HeaderView(state));
-  const level = levels[state.level].type === `artist` ? new ArtistView(levels[state.level]) : new GenreView(levels[state.level]);
+  const nextLevel = levels[state.level];
+  const level = nextLevel.type === `artist` ? new ArtistView(nextLevel) : new GenreView(nextLevel);
   level.onAnswer = onUserAnswer;
   updateScreen(levelContainer, level);
 };
 
-updateGame(gameState);
+export const startGame = () => {
+  updateGame(gameState);
+};
 
 export default gameContainer;
