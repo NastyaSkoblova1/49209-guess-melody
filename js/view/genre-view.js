@@ -64,5 +64,5 @@ export default class GenreView extends AbstractView {
    * Обработка ответов пользователя
    * @param {string} answer Элемент с ответом пользователя
    */
-  onAnswer(answer) {}
+  onAnswer(answer) {} // eslint-disable-line no-unused-vars
 }
