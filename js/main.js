@@ -1,4 +1,13 @@
 import {renderScreen} from './util.js';
-import welcomeElement from './module-welcome.js';
+import gameScreen from './app.js';
+import {startGame} from './app.js';
+import WelcomeView from './view/welcome-view.js';
 
-renderScreen(welcomeElement);
+const welcome = new WelcomeView();
+
+renderScreen(welcome.element);
+
+welcome.onStartClick = () => {
+  renderScreen(gameScreen);
+  startGame();
+};
