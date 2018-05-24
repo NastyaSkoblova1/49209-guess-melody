@@ -29,7 +29,7 @@ export const scoreConst = {
   WRONG: -2
 };
 
-export const initialState = {
+export const INITIAL_STATE = {
   level: 1,
   score: 0,
   notes: 0,
