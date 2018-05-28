@@ -21,10 +21,6 @@ class GameScreen {
     this._interval = null;
   }
 
-  init() {
-    this.state = Object.assign({}, INITIAL_STATE);
-  }
-
   get element() {
     return this.root;
   }
@@ -60,11 +56,56 @@ class GameScreen {
         resultScreen = new ResultTimeView();
         break;
     }
+
+    Application.showResultScreen(resultScreen);
   }
 
-  changeLevelView(view) {
-    this.root.replaceChild(view.element, this.level.element);
-    this.level = view;
+  answer(answer) {
+    this.stopGame();
+
+    switch (answer) {
+      case true:
+        this.model.state.answers.push({answer, time: this.model.getLevelTime()});
+        this.model.nextScreen();
+        if (this.model.state.level >= gameRules.MAX_LEVEL) {
+          this.endGame(`winner`);
+        } else {
+          this.startGame();
+        }
+        break;
+      case false:
+        this.model.state.answers.push({answer, time: this.levelTime});
+        this.model.loose();
+        this.model.nextScreen();
+        if (this.model.state.lives <= 0) {
+          this.endGame(`efforts`);
+        } else {
+          this.startGame();
+        }
+        break;
+    }
+  }
+
+  restart(continueGame) {
+    if (!continueGame) {
+      this.model.restart();
+    }
+
+    this.startGame();
+  }
+
+  updateHeader() {
+    const header = new HeaderView(this.model.state);
+    this.root.replaceChild(header.element, this.header.element);
+    this.header = header;
+  }
+
+  changeLevel() {
+    this.updateHeader();
+    const level = getCurrentView(this.model);
+    level.onAnswer = this.answer.bind(this);
+    this.root.replaceChild(level.element, this.level.element);
+    this.level = level;
   }
 }
 
