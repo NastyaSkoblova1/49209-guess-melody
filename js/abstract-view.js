@@ -1,14 +1,7 @@
-export const main = document.querySelector(`.app`);
-
 export const createElement = (template = ``, tagName = `div`) => {
   const outer = document.createElement(tagName);
   outer.innerHTML = template.trim();
   return outer;
-};
-
-export const renderScreen = (view) => {
-  main.innerHTML = ``;
-  main.appendChild(view);
 };
 
 export const updateScreen = (parent, view) => {
