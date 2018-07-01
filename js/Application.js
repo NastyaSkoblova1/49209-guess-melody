@@ -1,29 +1,30 @@
-import Welcome from './view/welcome-view.js';
-import GameModel from './GameScreen.js';
-import GameScreen from './GameModel.js';
+import WelcomeView from './view/WelcomeView.js';
+import GameScreen from './GameScreen.js';
+import GameModel from './GameModel.js';
 
-export const main = document.querySelector(`.app`);
+const main = document.querySelector(`.main`);
 
-export const changeView = (element) => {
+const changeView = (element) => {
   main.innerHTML = ``;
   main.appendChild(element);
 };
 
-export default class Application() {
+export default class Application {
   static showWelcome() {
-    const welcome = new WelcomeScreen();
+    const welcome = new WelcomeView();
+    welcome.element.className = `main main--welcome`;
     changeView(welcome.element);
   }
 
-  static showGame(userName) {
+  static showGame() {
     const model = new GameModel();
     const gameScreen = new GameScreen(model);
     changeView(gameScreen.element);
     gameScreen.startGame();
   }
 
-  static showStats(stats) {
-    const statistics = new StatsScreen(stats);
-    changeView(statistics.element); 
+  static showStats(view) {
+    view.element.className = `main main--result`;
+    changeView(view.element);
   }
 }

@@ -4,12 +4,7 @@ export const createElement = (template = ``, tagName = `div`) => {
   return outer;
 };
 
-export const updateScreen = (parent, view) => {
-  parent.innerHTML = ``;
-  parent.appendChild(view.element);
-};
-
-export default class AbstractView () => {
+export default class AbstractView {
   constructor() {
     if (new.target === AbstractView) {
       throw new Error(`Can't instantiate AbstractView, only concrete one`);
@@ -33,7 +28,5 @@ export default class AbstractView () => {
     return createElement(this.template);
   }
 
-  bind() {
-
-  }
+  bind() {}
 }
