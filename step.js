@@ -2,7 +2,7 @@
 
 	$(document).ready(function() {
 
-    $('head').append('<style>.t-form__screen .t-form__screen-wrapper{display:none;}.t-form__screen .t-form__submit{position:relative;}.t-form__screen .t-form__submit::before,.t-form__screen .t-form__submit::after{content:"";display:table;}.t-form__screen .t-form__submit::after{clear: both;}.t-form__screen .t-form__screen-btn-prev td,.t-form__screen .t-form__screen-btn-next td{position:relative;}.t-form__screen .t-form__screen-btn-prev{display:none;float:left;padding-left:45px;}.t-form__screen .t-form__screen-btn-next{float:right;padding-right:45px;}.t-form__screen .t-form__screen-btn-prev td::before{content:"→";position:absolute;left:-23px;font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.3;transform:rotate(180deg);}.t-form__screen .t-form__screen-btn-next td::after{content:" →";position:absolute;font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1;}.t-form__screen .t-submit{float:right;width:auto;height:45px;font-size:14px;padding-left:30px;padding-right:30px;}.t-form__screen .t-form__screen-number{position:absolute;top:50%;left:50%;font-size:12px;color:#333333;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%);}.t-form__screen .t-form__screen-number_opacity{opacity:0.6;}@media screen and (max-width: 480px){.t-form__screen .t-form__screen-btn-prev{padding-left:20px;}.t-form__screen .t-form__screen-btn-next{padding-right:20px;}.t-form__screen .t-form__screen-btn-prev td::before,.t-form__screen .t-form__screen-btn-next td::after{display:none;}}#svg circle{stroke-dashoffset: 0;transition: stroke-dashoffset 1s linear;stroke: #666666;stroke-width: 3px;}#svg #bar{stroke: #FF9F1E;}</style>');
+    $('head').append('<style>.t-form__screen .t-form__screen-wrapper{display:none;}.t-form__screen .t-form__submit{position:relative;}.t-form__screen .t-form__submit::before,.t-form__screen .t-form__submit::after{content:"";display:table;}.t-form__screen .t-form__submit::after{clear: both;}.t-form__screen .t-form__screen-btn-prev td,.t-form__screen .t-form__screen-btn-next td{position:relative;}.t-form__screen .t-form__screen-btn-prev{display:none;float:left;padding-left:45px;}.t-form__screen .t-form__screen-btn-next{float:right;padding-right:45px;}.t-form__screen .t-form__screen-btn-prev td::before{content:"→";position:absolute;left:-23px;font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.3;transform:rotate(180deg);}.t-form__screen .t-form__screen-btn-next td::after{content:" →";position:absolute;font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1;}.t-form__screen .t-submit{float:right;width:auto;height:45px;font-size:14px;padding-left:30px;padding-right:30px;}.t-form__screen .t-form__screen-number-container{display:inline-block;vertical-align:middle;margin-right:5px;}.t-form__screen .t-form__screen-current-view{color:#ffffff;position:absolute;top:50%;left:50%;font-size:12px;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%);}.t-form__screen .t-form__screen-number_opacity{opacity:0.6;}@media screen and (max-width: 480px){.t-form__screen .t-form__screen-btn-prev{padding-left:20px;}.t-form__screen .t-form__screen-btn-next{padding-right:20px;}.t-form__screen .t-form__screen-btn-prev td::before,.t-form__screen .t-form__screen-btn-next td::after{display:none;}}.t-form__screen-progress{display:inline-block;vertical-align:middle;}.t-form__screen-progress circle{stroke-dashoffset:62.8319;transition:stroke-dashoffset 1s linear;stroke-width: 3px;}.t-form__screen-progress-circle{stroke:#ffffff;}.t-form__screen-progress-bar{stroke:red;stroke-width:3px;}</style>');
 
 		/* Разбиение формы на экраны через поле */
     t_form_splittingOnStep = function () {
@@ -16,8 +16,8 @@
 				if (splitField.length !== 0) {
 					var submitWrapper = $this.find('.t-form__submit');
 					var buttonsHTML = window.tildaBrowserLang == 'RU' ?
-						'<div class="t-form__screen-number t-name"></div><button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Назад</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Далее</td></tr></tbody></table></button>' :
-						'<div class="t-form__screen-number t-name"></div><button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Back</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Next</td></tr></tbody></table></button>';
+						'<div class="t-form__screen-current-view t-name"></div><button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Назад</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Далее</td></tr></tbody></table></button>' :
+						'<div class="t-form__screen-current-view t-name"></div><button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Back</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Next</td></tr></tbody></table></button>';
 					submitWrapper.append(buttonsHTML);
 
 					var submitBtn = $this.find('.t-submit');
@@ -28,10 +28,16 @@
 					var inputTitle = $this.find('.t-input-title');
 					var lastSplitField = splitField.last();
 					var lastInputsBeforeSplitField = lastSplitField.nextAll('.t-input-group');
-          var numberOfScreen = $this.find('.t-form__screen-number');
+          var numberContainer = $this.find('.t-form__screen-current-view');
 					var currentScreen = 0;
 
 					submitBtn.hide();
+
+					console.log(btnStyles);
+					console.log(prevBtn);
+					console.log(nextBtn);
+					console.log(submitBtn);
+					console.log(numberContainer);
 
 					if (btnStyles.length != 0) {
 						prevBtn.attr('style', btnStyles);
@@ -43,7 +49,8 @@
 					var formScreen = $this.find('.t-form__screen-wrapper');
 					$(formScreen[currentScreen]).show();
 
-					t_form_addNumberOfScreen(numberOfScreen, currentScreen, formScreen);
+					t_form_addAllNumberAndProgress(numberContainer, formScreen);
+					t_form_setCurrentNumber($this, currentScreen);
 
 					nextBtn.on('click', function() {
             var $this = $(this);
@@ -53,15 +60,21 @@
 
 						if (!errorOnScreen) {
 							currentScreen++;
-              t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberOfScreen, submitBtn, prevBtn, nextBtn);
+              t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
+							t_form_setCurrentNumber($activeForm, currentScreen);
 						}
 					});
 
 					prevBtn.on('click', function() {
+						var $this = $(this);
+						var $activeForm = $this.parents('.t-form');
+
 						if (currentScreen > 0) {
 							currentScreen--;
 						}
-						t_form_transitionToPrevStep(formScreen, currentScreen, numberOfScreen, submitBtn, prevBtn, nextBtn);
+
+						t_form_transitionToPrevStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
+						t_form_setCurrentNumber($activeForm, currentScreen);
             t_form_calculateCoverHeight($(this).parents('.t-rec'));
 					});
 
@@ -75,7 +88,7 @@
 
 							if (!errorOnScreen) {
 								currentScreen++;
-                t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberOfScreen, submitBtn, prevBtn, nextBtn);
+                t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 							}
 
 							e.preventDefault();
@@ -85,6 +98,29 @@
 				}
 			});
     }
+
+
+		function t_form_addAllNumberAndProgress(numberContainer, formScreen) {
+      numberContainer.html('<div class="t-form__screen-number-container"><span class="t-form__screen-number_opacity"></span><span>/' + (formScreen.length) + '</span></div><svg class="t-form__screen-progress" style="transform: rotate(-90deg);" width="30" height="30" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle class="t-form__screen-progress-circle" r="10" cx="15" cy="15" fill="transparent" stroke-dasharray="0" stroke-dashoffset="0"></circle><circle class="t-form__screen-progress-bar" r="10" cx="15" cy="15" fill="transparent" stroke-dasharray="62.8319" stroke-dashoffset="62.8319"></circle></svg>');
+		}
+
+
+		function t_form_setCurrentNumber($this, currentScreen) {
+			var numberCurrentContainer = $this.find('.t-form__screen-number_opacity');
+			numberCurrentContainer.html(currentScreen + 1);
+		}
+
+
+		function t_form_setProgressbar($activeForm, formScreen, direction) {
+			var progressBar = $activeForm.find('.t-form__screen-progress-bar');
+			var progressCircleLength = progressBar.attr('stroke-dasharray');
+			var progressBarLength = +progressBar.attr('stroke-dashoffset');
+			var progressStep = progressCircleLength / (formScreen.length - 1);
+			var newProgressLength = progressBarLength - direction * progressStep;
+
+			progressBar.css('stroke-dashoffset', newProgressLength);
+			progressBar.attr('stroke-dashoffset', newProgressLength);
+		}
 
 
     function t_form_breakOnStep(splitField, lastInputsBeforeSplitField) {
@@ -114,34 +150,29 @@
     }
 
 
-    function t_form_transitionToPrevStep(formScreen, currentScreen, numberOfScreen, submitBtn, prevBtn, nextBtn) {
-      var $activeForm = $(this).parents('.t-form');
+    function t_form_transitionToPrevStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn) {
       window.tildaForm.hideErrors($activeForm);
       nextBtn.show();
       submitBtn.hide();
+			t_form_setProgressbar($activeForm, formScreen, -1);
       if (currentScreen == 0) {prevBtn.hide()};
       $(formScreen).hide();
       $(formScreen[currentScreen]).show();
       $activeForm.removeClass('js-form-proccess');
-      t_form_addNumberOfScreen(numberOfScreen, currentScreen, formScreen);
     }
 
 
-    function t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberOfScreen, submitBtn, prevBtn, nextBtn) {
+    function t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn) {
       formScreen.hide();
       $(formScreen[currentScreen]).show();
-      t_form_addNumberOfScreen(numberOfScreen, currentScreen, formScreen);
       prevBtn.show();
+			t_form_setProgressbar($activeForm, formScreen, 1);
 
       if (currentScreen == formScreen.length - 1) {
         nextBtn.hide();
         submitBtn.show();
         $activeForm.addClass('js-form-proccess');
       }
-    }
-
-    function t_form_addNumberOfScreen(numberOfScreen, currentScreen, formScreen) {
-      numberOfScreen.html('<span class="t-form__screen-number_opacity">' + (currentScreen + 1) + '</span>' + '<span>/' + (formScreen.length) + '</span><svg id="svg" width="30" height="30" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle r="10" cx="15" cy="15" fill="transparent" stroke-dasharray="62.8319" stroke-dashoffset="0"></circle><circle id="bar" r="10" cx="15" cy="15" fill="transparent" stroke-dasharray="62.8319" stroke-dashoffset="0"></circle></svg>');
     }
 
 
@@ -170,27 +201,6 @@
 		}
 
 		t_form_splittingOnStep();
-
-    /* window.tildaForm.setScreenProgress = function(formScreen, currentScreen) {
-			var val = parseInt($(this).val());
-			var $circle = $('#svg #bar');
-
-			if (isNaN(val)) {
-				val = 100;
-			} else {
-				var circleRadius = $circle.attr('r');
-				var circleLength = Math.PI * (circleRadius * 2);
-
-				if (val < 0) {val = 0;}
-				if (val > 100) {val = 100;}
-
-				var pct = ((100 - val) / 100) * circleLength;
-
-				$circle.css({strokeDashoffset: pct});
-
-				$('#cont').attr('data-pct', val);
-			}
-		} */
 
 	});
 
