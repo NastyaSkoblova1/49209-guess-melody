@@ -192,8 +192,8 @@
 			}
 		}
 	}
-  //
-	// t_form_splittingOnStep();
+
+	t_form_splittingOnStep();
 
 	});
 
