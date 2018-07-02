@@ -22,7 +22,6 @@
 				var submitBtn = $this.find('.t-submit');
 				var prevBtn = $this.find('.t-form__screen-btn-prev');
 				var nextBtn = $this.find('.t-form__screen-btn-next');
-				var btnStyles = submitBtn.attr('style');
 				var inputGroup = $this.find('.t-input-group');
 				var inputTitle = $this.find('.t-input-title');
 				var lastSplitField = splitField.last();
@@ -32,15 +31,12 @@
 
 				submitBtn.hide();
 
-				console.log(btnStyles);
-				console.log(prevBtn);
-				console.log(nextBtn);
-				console.log(submitBtn);
-				console.log(numberContainer);
-
-				if (btnStyles.length != 0) {
-					prevBtn.attr('style', btnStyles);
-					nextBtn.attr('style', btnStyles);
+				if (submitBtn.length !== 0) {
+					var btnStyles = submitBtn.attr('style');
+					if (btnStyles.length != 0) {
+						prevBtn.attr('style', btnStyles);
+						nextBtn.attr('style', btnStyles);
+					}
 				}
 
 				t_form_breakOnStep(splitField, lastInputsBeforeSplitField);
