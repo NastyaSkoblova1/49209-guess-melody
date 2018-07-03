@@ -116,9 +116,9 @@
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
 
-			console.log(progressStep);
-			console.log(progressBarLength);
-			console.log(newProgressLength);
+			console.log('Step: ' + progressStep);
+			console.log('Progressbar: ' + progressBarLength);
+			console.log('New progress: ' + newProgressLength);
 		}
 
 
@@ -197,6 +197,7 @@
 				}, 2000);
 				}
 			}
+			console.log()
 		}
 
 		t_form_splittingOnStep();
