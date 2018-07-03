@@ -96,7 +96,7 @@
 
 
 		function t_form_addAllNumberAndProgress(numberContainer, formScreen) {
-			numberContainer.html('<div class="t-form__screen-number-container"><span class="t-form__screen-number_opacity"></span><span>/' + (formScreen.length) + '</span></div><svg class="t-form__screen-progress" style="transform: rotate(-90deg);" width="30" height="30" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle class="t-form__screen-progress-circle" r="10" cx="15" cy="15" fill="transparent" stroke-dasharray="0" stroke-dashoffset="0"></circle><circle class="t-form__screen-progress-bar" r="10" cx="15" cy="15" fill="transparent" stroke-dasharray="62.8319" stroke-dashoffset="62.8319"></circle></svg>');
+			numberContainer.html('<div class="t-form__screen-number-container"><span class="t-form__screen-number_opacity"></span><span>/' + (formScreen.length) + '</span></div><svg class="t-form__screen-progress" style="-webkit-transform:rotate(-90deg);-ms-transform:rotate(-90deg);transform:rotate(-90deg);" width="30" height="30" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle class="t-form__screen-progress-circle" r="10" cx="15" cy="15" fill="transparent" stroke-dasharray="0" stroke-dashoffset="0"></circle><circle class="t-form__screen-progress-bar" r="10" cx="15" cy="15" fill="transparent" stroke-dasharray="62.8319" stroke-dashoffset="62.8319"></circle></svg>');
 		}
 
 
@@ -115,6 +115,10 @@
 
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
+
+			console.log(progressStep);
+			console.log(progressBarLength);
+			console.log(newProgressLength);
 		}
 
 
