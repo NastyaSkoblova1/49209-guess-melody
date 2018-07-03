@@ -31,6 +31,7 @@
 					var lastInputsBeforeSplitField = lastSplitField.nextAll('.t-input-group');
 					var numberContainer = $this.find('.t-form__screen-current-view');
 					var currentScreen = 0;
+					var coverHeight = $this.parents('.t-rec').find('.t-cover').height();
 
 					submitBtn.hide();
 
@@ -47,20 +48,26 @@
 					t_form_addAllNumberAndProgress(numberContainer, formScreen);
 					t_form_setCurrentNumber($this, currentScreen);
 
-					nextBtn.on('click', function() {
+					nextBtn.on('click', function(e) {
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
 						var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
-						t_form_calculateCoverHeight($this.parents('.t-rec'));
+						t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 
 						if (!errorOnScreen) {
 							currentScreen++;
 							t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 							t_form_setCurrentNumber($activeForm, currentScreen);
 						}
+
+						if (typeof $(".t-records").attr("data-tilda-mode")=="undefined") {
+				        if(window.lazy=='y'){t_lazyload_update();}
+				    }
+
+						e.preventDefault();
 					});
 
-					prevBtn.on('click', function() {
+					prevBtn.on('click', function(e) {
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
 
@@ -70,7 +77,9 @@
 
 						t_form_transitionToPrevStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 						t_form_setCurrentNumber($activeForm, currentScreen);
-						t_form_calculateCoverHeight($(this).parents('.t-rec'));
+						t_form_calculateCoverHeight($(this).parents('.t-rec'), coverHeight);
+
+						e.preventDefault();
 					});
 
 					formScreen.keypress(function(e) {
@@ -79,15 +88,23 @@
 
 						if (e.keyCode === 13 && !$activeForm.hasClass('js-form-proccess')) {
 							var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
-							t_form_calculateCoverHeight($this.parents('.t-rec'));
+							t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 
 							if (!errorOnScreen) {
 								currentScreen++;
 								t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 							}
 
+							if (typeof $(".t-records").attr("data-tilda-mode")=="undefined") {
+					        if(window.lazy=='y'){t_lazyload_update();}
+					    }
+
 							e.preventDefault();
 						}
+					});
+
+					$(window).on('resize', function() {
+						t_form_calculateCoverHeight(splitField.parents('.t-rec'), coverHeight);
 					});
 
 				}
@@ -175,7 +192,7 @@
 		}
 
 
-		function t_form_calculateCoverHeight(el) {
+		function t_form_calculateCoverHeight(el, coverHeight) {
 			/* correct cover height if content more when cover height */
 			var hcover = el.find('.t-cover').height();
 			var hcontent = el.find('div[data-hook-content]').outerHeight();
@@ -197,7 +214,13 @@
 				}, 2000);
 				}
 			}
-			console.log()
+
+			if (hcontent < hcover) {
+				el.find('.t-cover').height(coverHeight);
+				el.find('.t-cover__filter').height(coverHeight);
+				el.find('.t-cover__carrier').height(coverHeight);
+				el.find('.t-cover__wrapper').height(coverHeight);
+			}
 		}
 
 		t_form_splittingOnStep();
