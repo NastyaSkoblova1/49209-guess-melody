@@ -13,13 +13,7 @@
 				if (splitField.length !== 0) {
 					$this.addClass('t-form__screen');
 					$this.removeClass('js-form-proccess');
-					var submitWrapper = $this.find('.t-form__submit');
-					var buttonsHTML = window.tildaBrowserLang == 'RU' ?
-					'<button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Назад</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Далее</td></tr></tbody></table></button>' :
-					'<button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Back</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Next</td></tr></tbody></table></button>';
-					var progressHTML = '<div class="t-form__screen-current-view t-name"></div>';
-					submitWrapper.prepend(buttonsHTML);
-					submitWrapper.append(progressHTML);
+					t_form_addBtns($this);
 
 					var submitBtn = $this.find('.t-submit');
 					var prevBtn = $this.find('.t-form__screen-btn-prev');
@@ -49,53 +43,36 @@
 						var $activeForm = $this.parents('.t-form');
 						var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
 						t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
-
 						if (!errorOnScreen) {
 							currentScreen++;
 							t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
-							t_form_setCurrentNumber($activeForm, currentScreen);
 						}
-
-						if (typeof $(".t-records").attr("data-tilda-mode")=="undefined") {
-				        if(window.lazy=='y'){t_lazyload_update();}
-				    }
-
+						t_form_lazyLoad();
 						e.preventDefault();
 					});
 
 					prevBtn.on('click', function(e) {
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
-
 						if (currentScreen > 0) {
 							currentScreen--;
 						}
-
 						t_form_transitionToPrevStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
-						t_form_setCurrentNumber($activeForm, currentScreen);
 						t_form_calculateCoverHeight($(this).parents('.t-rec'), coverHeight);
-
 						e.preventDefault();
 					});
 
 					formScreen.keypress(function(e) {
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
-
 						if (e.keyCode === 13 && !$activeForm.hasClass('js-form-proccess')) {
 							var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
 							t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
-
 							if (!errorOnScreen) {
 								currentScreen++;
 								t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
-								t_form_setCurrentNumber($activeForm, currentScreen);
 							}
-
-							if (typeof $(".t-records").attr("data-tilda-mode")=="undefined") {
-					        if(window.lazy=='y'){t_lazyload_update();}
-					    }
-
+							t_form_lazyLoad();
 							e.preventDefault();
 						}
 					});
@@ -106,6 +83,24 @@
 
 				}
 			});
+		}
+
+
+		function t_form_lazyLoad() {
+			if (typeof $(".t-records").attr("data-tilda-mode")=="undefined") {
+					if(window.lazy=='y'){t_lazyload_update();}
+			}
+		}
+
+
+		function t_form_addBtns($this) {
+			var submitWrapper = $this.find('.t-form__submit');
+			var buttonsHTML = window.tildaBrowserLang == 'RU' ?
+			'<button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Назад</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Далее</td></tr></tbody></table></button>' :
+			'<button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Back</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Next</td></tr></tbody></table></button>';
+			var progressHTML = '<div class="t-form__screen-current-view t-name"></div>';
+			submitWrapper.prepend(buttonsHTML);
+			submitWrapper.append(progressHTML);
 		}
 
 
@@ -168,6 +163,7 @@
 			$(formScreen).hide();
 			$(formScreen[currentScreen]).show();
 			$activeForm.removeClass('js-form-proccess');
+			t_form_setCurrentNumber($activeForm, currentScreen);
 		}
 
 
@@ -176,12 +172,12 @@
 			$(formScreen[currentScreen]).show();
 			prevBtn.show();
 			t_form_setProgressbar($activeForm, formScreen, 1);
-
 			if (currentScreen == formScreen.length - 1) {
 				nextBtn.hide();
 				submitBtn.show();
 				$activeForm.addClass('js-form-proccess');
 			}
+			t_form_setCurrentNumber($activeForm, currentScreen);
 		}
 
 
