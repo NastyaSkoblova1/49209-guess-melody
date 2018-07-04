@@ -89,6 +89,7 @@
 							if (!errorOnScreen) {
 								currentScreen++;
 								t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
+								t_form_setCurrentNumber($activeForm, currentScreen);
 							}
 
 							if (typeof $(".t-records").attr("data-tilda-mode")=="undefined") {
