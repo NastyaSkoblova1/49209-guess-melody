@@ -15,7 +15,6 @@
 					$this.addClass('t-form__screen');
 					$this.parents('.t-form').removeClass('js-form-proccess');
 					t_form_addBtns($this);
-
 					var submitBtn = $this.find('.t-submit');
 					var prevBtn = $this.find('.t-form__screen-btn-prev');
 					var nextBtn = $this.find('.t-form__screen-btn-next');
