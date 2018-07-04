@@ -6,6 +6,8 @@
 
 		t_form_splittingOnStep = function () {
 
+			console.log('Publish');
+
 			$('form').each(function() {
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
