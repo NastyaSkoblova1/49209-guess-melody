@@ -121,6 +121,7 @@
 			numberCurrentContainer.html(currentScreen + 1);
 			console.log(currentScreen);
 			console.log(numberCurrentContainer);
+			console.log($this);
 		}
 
 
