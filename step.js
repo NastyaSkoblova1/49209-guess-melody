@@ -31,10 +31,8 @@
 					}
 
 					t_form_breakOnStep(splitField, lastInputsBeforeSplitField);
-
 					var formScreen = $this.find('.t-form__screen-wrapper');
 					$(formScreen[currentScreen]).show();
-
 					t_form_addAllNumberAndProgress(numberContainer, formScreen);
 					t_form_setCurrentNumber($this, currentScreen);
 
@@ -131,7 +129,6 @@
 			var progressBarLength = parseFloat(progressBar.attr('stroke-dashoffset')).toFixed(6);
 			var progressStep = progressCircleLength / (formScreen.length - 1);
 			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(6);
-
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
 		}
@@ -141,7 +138,6 @@
 			splitField.each(function(i) {
 				$(splitField[i]).prevUntil(splitField[i-1]).wrapAll('<div class="t-form__screen-wrapper"></div>');
 			});
-
 			if (lastInputsBeforeSplitField.length !== 0) {
 				lastInputsBeforeSplitField.wrapAll('<div class="t-form__screen-wrapper"></div>');
 			}
