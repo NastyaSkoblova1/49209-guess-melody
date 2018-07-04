@@ -9,17 +9,11 @@
 			$('.t-form__inputsbox').each(function() {
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
-				console.log('Split: ' + splitField);
-				console.log($this);
 
 				if (splitField.length !== 0) {
 					$this.addClass('t-form__screen');
 					$this.removeClass('js-form-proccess');
 					t_form_addBtns($this);
-
-					console.log('Hello!');
-					console.log(splitField);
-					console.log($this);
 
 					var submitBtn = $this.find('.t-submit');
 					var prevBtn = $this.find('.t-form__screen-btn-prev');
@@ -125,6 +119,7 @@
 		function t_form_setCurrentNumber($this, currentScreen) {
 			var numberCurrentContainer = $this.find('.t-form__screen-number_opacity');
 			numberCurrentContainer.html(currentScreen + 1);
+			console.log(currentScreen);
 		}
 
 
@@ -132,16 +127,16 @@
 			var progressBar = $activeForm.find('.t-form__screen-progress-bar');
 			var progressCircleLength = parseFloat(progressBar.attr('stroke-dasharray'));
 			var progressBarLength = parseFloat(progressBar.attr('stroke-dashoffset')).toFixed(6);
-			// var progressStep = progressCircleLength / (formScreen.length - 1);
-			// var newProgressLength = +(progressBarLength - direction * progressStep).toFixed(6);
+			var progressStep = progressCircleLength / (formScreen.length - 1);
+			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(6);
 
 			console.log('Circle: ' + progressCircleLength);
 			console.log('Progressbar: ' + progressBarLength);
-			// console.log('Step: ' + progressStep);
-			// console.log('Progress length: ' + newProgressLength);
+			console.log('Step: ' + progressStep);
+			console.log('Progress length: ' + newProgressLength);
 
-			// progressBar.css('stroke-dashoffset', newProgressLength);
-			// progressBar.attr('stroke-dashoffset', newProgressLength);
+			progressBar.css('stroke-dashoffset', newProgressLength);
+			progressBar.attr('stroke-dashoffset', newProgressLength);
 		}
 
 
