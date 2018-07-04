@@ -24,7 +24,7 @@
 					var submitBtn = $this.find('.t-submit');
 					var prevBtn = $this.find('.t-form__screen-btn-prev');
 					var nextBtn = $this.find('.t-form__screen-btn-next');
-					var btnStyles = submitBtn.attr('style');
+					// var btnStyles = submitBtn.attr('style');
 					var inputGroup = $this.find('.t-input-group');
 					var inputTitle = $this.find('.t-input-title');
 					var lastSplitField = splitField.last();
@@ -33,12 +33,14 @@
 					var currentScreen = 0;
 					var coverHeight = $this.parents('.t-rec').find('.t-cover').height();
 
-					submitBtn.hide();
-
-					if (btnStyles.length != 0) {
-						prevBtn.attr('style', btnStyles);
-						nextBtn.attr('style', btnStyles);
+					if (submitBtn.length !== 0) {
+						submitBtn.hide();
 					}
+					
+					// if (btnStyles.length != 0) {
+					// 	prevBtn.attr('style', btnStyles);
+					// 	nextBtn.attr('style', btnStyles);
+					// }
 
 					t_form_breakOnStep(splitField, lastInputsBeforeSplitField);
 
