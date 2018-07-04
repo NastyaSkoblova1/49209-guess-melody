@@ -9,8 +9,6 @@
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
 
-				$this.css('opacity', 0);
-
 				if (splitField.length !== 0) {
 					$this.addClass('t-form__screen');
 					$this.parents('.t-form').removeClass('js-form-proccess');
