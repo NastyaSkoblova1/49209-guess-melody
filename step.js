@@ -34,6 +34,7 @@
 					$(formScreen[currentScreen]).show();
 					t_form_addAllNumberAndProgress(numberContainer, formScreen);
 					t_form_setCurrentNumber($this, currentScreen);
+					t_form_setProgressbar($this, formScreen, 1)
 
 					nextBtn.on('click', function(e) {
 						var $this = $(this);
@@ -126,7 +127,7 @@
 			var progressBar = $activeForm.find('.t-form__screen-progress-bar');
 			var progressCircleLength = parseFloat(progressBar.attr('stroke-dasharray'));
 			var progressBarLength = parseFloat(progressBar.attr('stroke-dashoffset')).toFixed(6);
-			var progressStep = progressCircleLength / (formScreen.length - 1);
+			var progressStep = progressCircleLength / (formScreen.length);
 			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(6);
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
