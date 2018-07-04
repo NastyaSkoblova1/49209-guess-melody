@@ -87,9 +87,8 @@
 						t_form_calculateCoverHeight(splitField.parents('.t-rec'), coverHeight);
 					});
 
-					$this.on('submit', function() {
+					$this.parents('.t-form').on('submit', function() {
 				    prevBtn.hide();
-
 				    if ($(this).hasClass('js-send-form-success')) {
 				      prevBtn.hide();
 				    }
@@ -131,13 +130,13 @@
 
 		function t_form_setProgressbar($activeForm, formScreen, direction) {
 			var progressBar = $activeForm.find('.t-form__screen-progress-bar');
-			var progressCircleLength = parseInt(progressBar.attr('stroke-dasharray'));
-			// var progressBarLength = +(progressBar.attr('stroke-dashoffset')).toFixed(6);
+			var progressCircleLength = parseFloat(progressBar.attr('stroke-dasharray'));
+			var progressBarLength = parseFloat(progressBar.attr('stroke-dashoffset')).toFixed(6);
 			// var progressStep = progressCircleLength / (formScreen.length - 1);
 			// var newProgressLength = +(progressBarLength - direction * progressStep).toFixed(6);
 
 			console.log('Circle: ' + progressCircleLength);
-			// console.log('Progressbar: ' + progressBarLength);
+			console.log('Progressbar: ' + progressBarLength);
 			// console.log('Step: ' + progressStep);
 			// console.log('Progress length: ' + newProgressLength);
 
