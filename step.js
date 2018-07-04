@@ -9,6 +9,8 @@
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
 
+				console.log('Hello!');
+
 				if (splitField.length !== 0) {
 					$this.addClass('t-form__screen');
 					$this.parents('.t-form').removeClass('js-form-proccess');
@@ -131,10 +133,6 @@
 			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(3);
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
-
-			console.log(progressCircleLength);
-			console.log(progressStep);
-			console.log(newProgressLength);
 		}
 
 
