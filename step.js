@@ -6,10 +6,11 @@
 
 		t_form_splittingOnStep = function () {
 
-			$('form').each(function() {
+			$('.t-form__inputsbox').each(function() {
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
 				console.log('Split: ' + splitField);
+				console.log($this);
 
 				if (splitField.length !== 0) {
 					$this.addClass('t-form__screen');
