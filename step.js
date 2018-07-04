@@ -9,12 +9,14 @@
 			$('form').each(function() {
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
+				console.log('Split: ' + splitField);
 
 				if (splitField.length !== 0) {
 					$this.addClass('t-form__screen');
 					$this.removeClass('js-form-proccess');
 					t_form_addBtns($this);
 
+					console.log('Hello!');
 					console.log(splitField);
 					console.log($this);
 
