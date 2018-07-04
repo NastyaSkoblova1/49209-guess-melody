@@ -130,11 +130,6 @@
 			var progressStep = progressCircleLength / (formScreen.length - 1);
 			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(6);
 
-			console.log('Circle: ' + progressCircleLength);
-			console.log('Progressbar: ' + progressBarLength);
-			console.log('Step: ' + progressStep);
-			console.log('Progress length: ' + newProgressLength);
-
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
 		}
