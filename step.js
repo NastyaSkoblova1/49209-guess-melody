@@ -1,4 +1,4 @@
-
+(function($){
 
 	$(document).ready(function() {
 
@@ -218,3 +218,5 @@
 		t_form_splittingOnStep();
 
 	});
+
+})(jQuery);
