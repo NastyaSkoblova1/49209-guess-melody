@@ -11,7 +11,7 @@
 				var splitField = $this.find('.t-input-group_st');
 
 				if (splitField.length !== 0) {
-					$this.parents('.t-form').addClass('t-form__screen');
+					$this.addClass('t-form__screen');
 					$this.parents('.t-form').removeClass('js-form-proccess');
 					t_form_addBtns($this);
 
@@ -41,12 +41,11 @@
 					nextBtn.on('click', function(e) {
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
-						var inputBoxForm = $this.parents('.t-form__inputsbox');
 						var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
 						t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 						if (!errorOnScreen) {
 							currentScreen++;
-							t_form_transitionToNextStep($activeForm, inputBoxForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
+							t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 						}
 						t_form_lazyLoad();
 						e.preventDefault();
@@ -55,11 +54,10 @@
 					prevBtn.on('click', function(e) {
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
-						var inputBoxForm = $this.parents('.t-form__inputsbox');
 						if (currentScreen > 0) {
 							currentScreen--;
 						}
-						t_form_transitionToPrevStep($activeForm, inputBoxForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
+						t_form_transitionToPrevStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 						t_form_calculateCoverHeight($(this).parents('.t-rec'), coverHeight);
 						e.preventDefault();
 					});
@@ -67,13 +65,12 @@
 					formScreen.keypress(function(e) {
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
-						var inputBoxForm = $this.parents('.t-form__inputsbox');
 						if (e.keyCode === 13 && !$activeForm.hasClass('js-form-proccess')) {
 							var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
 							t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 							if (!errorOnScreen) {
 								currentScreen++;
-								t_form_transitionToNextStep($activeForm, inputBoxForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
+								t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 							}
 							t_form_lazyLoad();
 							e.preventDefault();
@@ -164,7 +161,7 @@
 		}
 
 
-		function t_form_transitionToPrevStep($activeForm, inputBoxForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn) {
+		function t_form_transitionToPrevStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn) {
 			window.tildaForm.hideErrors($activeForm);
 			nextBtn.show();
 			submitBtn.hide();
@@ -173,11 +170,11 @@
 			$(formScreen).hide();
 			$(formScreen[currentScreen]).show();
 			$activeForm.removeClass('js-form-proccess');
-			t_form_setCurrentNumber(inputBoxForm, currentScreen);
+			t_form_setCurrentNumber($activeForm, currentScreen);
 		}
 
 
-		function t_form_transitionToNextStep($activeForm, inputBoxForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn) {
+		function t_form_transitionToNextStep($activeForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn) {
 			formScreen.hide();
 			$(formScreen[currentScreen]).show();
 			prevBtn.show();
