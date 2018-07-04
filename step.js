@@ -6,8 +6,6 @@
 
 		t_form_splittingOnStep = function () {
 
-			console.log('Publish');
-
 			$('form').each(function() {
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
@@ -16,6 +14,9 @@
 					$this.addClass('t-form__screen');
 					$this.removeClass('js-form-proccess');
 					t_form_addBtns($this);
+
+					console.log(splitField);
+					console.log($this);
 
 					var submitBtn = $this.find('.t-submit');
 					var prevBtn = $this.find('.t-form__screen-btn-prev');
