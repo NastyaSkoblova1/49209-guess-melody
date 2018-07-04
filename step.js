@@ -1,4 +1,4 @@
-(function($){
+
 
 	$(document).ready(function() {
 
@@ -9,10 +9,10 @@
 			$('form').each(function() {
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
-				$this.addClass('t-form__screen');
-				$this.removeClass('js-form-proccess');
 
 				if (splitField.length !== 0) {
+					$this.addClass('t-form__screen');
+					$this.removeClass('js-form-proccess');
 					var submitWrapper = $this.find('.t-form__submit');
 					var buttonsHTML = window.tildaBrowserLang == 'RU' ?
 					'<button class="t-btn t-btn_sm t-form__screen-btn-prev" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Назад</td></tr></tbody></table></button><button class="t-btn t-btn_sm t-form__screen-btn-next" type="button"><table style="width:100%; height:100%;"><tbody><tr><td>Далее</td></tr></tbody></table></button>' :
@@ -24,7 +24,6 @@
 					var submitBtn = $this.find('.t-submit');
 					var prevBtn = $this.find('.t-form__screen-btn-prev');
 					var nextBtn = $this.find('.t-form__screen-btn-next');
-					// var btnStyles = submitBtn.attr('style');
 					var inputGroup = $this.find('.t-input-group');
 					var inputTitle = $this.find('.t-input-title');
 					var lastSplitField = splitField.last();
@@ -36,11 +35,6 @@
 					if (submitBtn.length !== 0) {
 						submitBtn.hide();
 					}
-					
-					// if (btnStyles.length != 0) {
-					// 	prevBtn.attr('style', btnStyles);
-					// 	nextBtn.attr('style', btnStyles);
-					// }
 
 					t_form_breakOnStep(splitField, lastInputsBeforeSplitField);
 
@@ -224,5 +218,3 @@
 		t_form_splittingOnStep();
 
 	});
-
-})(jQuery);
