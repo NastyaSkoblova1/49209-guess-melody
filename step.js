@@ -150,12 +150,10 @@
 			window.tildaForm.hideErrors($activeForm);
 			var errorOnScreen;
 			var errorsTypeObj = arErrors[0];
-
 			if (errorsTypeObj != undefined) {
 				var errorType = errorsTypeObj.type[0];
 				errorOnScreen = errorType == 'emptyfill' ? false : window.tildaForm.showErrors($activeForm, arErrors);
 			}
-
 			return errorOnScreen;
 		}
 
