@@ -81,6 +81,14 @@
 						t_form_calculateCoverHeight(splitField.parents('.t-rec'), coverHeight);
 					});
 
+					$this.on('submit', function() {
+				    prevBtn.hide();
+
+				    if ($(this).hasClass('js-send-form-success')) {
+				      prevBtn.hide();
+				    }
+				  });
+
 				}
 			});
 		}
