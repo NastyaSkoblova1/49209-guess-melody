@@ -128,9 +128,11 @@
 		function t_form_setProgressbar($activeForm, formScreen, direction) {
 			var progressBar = $activeForm.find('.t-form__screen-progress-bar');
 			var progressCircleLength = +progressBar.attr('stroke-dasharray');
-			var progressBarLength = +(+progressBar.attr('stroke-dashoffset')).toFixed(6);
+			// var progressBarLength = +(+progressBar.attr('stroke-dashoffset')).toFixed(6);
+			var progressBarLength = +(+progressBar.attr('stroke-dashoffset'));
 			var progressStep = progressCircleLength / (formScreen.length - 1);
-			var newProgressLength = +(progressBarLength - direction * progressStep).toFixed(6);
+			// var newProgressLength = +(progressBarLength - direction * progressStep).toFixed(6);
+			var newProgressLength = +(progressBarLength - direction * progressStep);
 
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
