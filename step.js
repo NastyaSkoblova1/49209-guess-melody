@@ -205,7 +205,6 @@
 				}, 2000);
 				}
 			}
-
 			if (hcontent < hcover) {
 				el.find('.t-cover').height(coverHeight);
 				el.find('.t-cover__filter').height(coverHeight);
