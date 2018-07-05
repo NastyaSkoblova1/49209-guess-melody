@@ -23,6 +23,8 @@
 					var numberContainer = $this.find('.t-form__screen-current-view');
 					var currentScreen = 0;
 					var coverHeight = $this.parents('.t-rec').find('.t-cover').height();
+					var stepDivider = $this.find('t-form-step-divider');
+					console.log(stepDivider);
 
 					if (submitBtn.length !== 0) {
 						submitBtn.hide();
@@ -39,7 +41,7 @@
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
 						var inputBoxForm = $this.parents('.t-form__inputsbox');
-						var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
+						var errorOnScreen = stepDivider.hasClass('t-form-step-divider_novalidate') ? false : t_form_checkOnError($activeForm, formScreen, currentScreen);
 						t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 						if (!errorOnScreen) {
 							currentScreen++;
@@ -66,7 +68,7 @@
 						var $activeForm = $this.parents('.t-form');
 						var inputBoxForm = $this.parents('.t-form__inputsbox');
 						if (e.keyCode === 13 && !$activeForm.hasClass('js-form-proccess')) {
-							var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
+							var errorOnScreen = stepDivider.hasClass('t-form-step-divider_novalidate') ? false : t_form_checkOnError($activeForm, formScreen, currentScreen);
 							t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 							if (!errorOnScreen) {
 								currentScreen++;
