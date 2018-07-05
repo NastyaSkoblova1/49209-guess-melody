@@ -213,8 +213,6 @@
 				el.find('.t-cover__wrapper').height(coverHeight);
 			}
 		}
-
-		// t_form_splittingOnStep();
 	});
 
 })(jQuery);
