@@ -148,6 +148,7 @@
 		function t_form_checkOnError($activeForm, formScreen, currentScreen) {
 			var $activeScreen = $(formScreen[currentScreen]);
 			var arErrors = window.tildaForm.validate($activeScreen);
+			console.log(arErrors);
 			window.tildaForm.hideErrors($activeForm);
 			var errorOnScreen;
 			var errorsTypeObj = arErrors[0];
