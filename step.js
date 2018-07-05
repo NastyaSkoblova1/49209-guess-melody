@@ -39,15 +39,12 @@
 						var $activeForm = $this.parents('.t-form');
 						var inputBoxForm = $this.parents('.t-form__inputsbox');
 						var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
-						console.log(errorOnScreen);
 						t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 						if (!errorOnScreen) {
-							console.log(errorOnScreen);
 							currentScreen++;
 							t_form_transitionToNextStep($activeForm, inputBoxForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 						}
 						t_form_lazyLoad();
-						console.log('Hello!');
 						e.preventDefault();
 					});
 
@@ -132,6 +129,8 @@
 			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(3);
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
+
+			console.log(progressCircleLength);
 		}
 
 
@@ -148,7 +147,6 @@
 		function t_form_checkOnError($activeForm, formScreen, currentScreen) {
 			var $activeScreen = $(formScreen[currentScreen]);
 			var arErrors = window.tildaForm.validate($activeScreen);
-			console.log(arErrors);
 			window.tildaForm.hideErrors($activeForm);
 			var errorOnScreen;
 			var errorsTypeObj = arErrors[0];
