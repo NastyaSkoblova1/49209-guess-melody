@@ -39,7 +39,6 @@
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
 						var inputBoxForm = $this.parents('.t-form__inputsbox');
-						// var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
 						var errorOnScreen = stepDivider.length !== 0 ? false : t_form_checkOnError($activeForm, formScreen, currentScreen);
 						t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 						if (!errorOnScreen) {
@@ -67,7 +66,6 @@
 						var $activeForm = $this.parents('.t-form');
 						var inputBoxForm = $this.parents('.t-form__inputsbox');
 						if (e.keyCode === 13 && !$activeForm.hasClass('js-form-proccess')) {
-							// var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
 							var errorOnScreen = stepDivider.length !== 0 ? false : t_form_checkOnError($activeForm, formScreen, currentScreen);
 							t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 							if (!errorOnScreen) {
@@ -132,6 +130,7 @@
 			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(3);
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
+			console.log($activeForm);
 		}
 
 
