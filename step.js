@@ -47,6 +47,7 @@
 							t_form_transitionToNextStep($activeForm, inputBoxForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 						}
 						t_form_lazyLoad();
+						console.log('Hello!');
 						e.preventDefault();
 					});
 
