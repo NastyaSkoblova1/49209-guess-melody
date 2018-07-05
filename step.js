@@ -132,8 +132,6 @@
 			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(3);
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
-			console.log(progressCircleLength);
-			console.log($activeForm);
 		}
 
 
