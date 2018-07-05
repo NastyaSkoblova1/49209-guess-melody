@@ -39,8 +39,10 @@
 						var $activeForm = $this.parents('.t-form');
 						var inputBoxForm = $this.parents('.t-form__inputsbox');
 						var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
+						console.log(errorOnScreen);
 						t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 						if (!errorOnScreen) {
+							console.log(errorOnScreen);
 							currentScreen++;
 							t_form_transitionToNextStep($activeForm, inputBoxForm, formScreen, currentScreen, numberContainer, submitBtn, prevBtn, nextBtn);
 						}
