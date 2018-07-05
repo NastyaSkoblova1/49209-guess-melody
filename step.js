@@ -132,6 +132,7 @@
 			progressBar.attr('stroke-dashoffset', newProgressLength);
 			console.log($activeForm);
 			console.log(progressBarLength);
+			console.log(progressCircleLength);
 		}
 
 
