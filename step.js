@@ -8,7 +8,6 @@
 			rec.find('.t-form__inputsbox').each(function() {
 				var $this = $(this);
 				var splitField = $this.find('.t-input-group_st');
-
 				if (splitField.length !== 0) {
 					$this.addClass('t-form__screen');
 					$this.parents('.t-form').removeClass('js-form-proccess');
