@@ -38,7 +38,8 @@
 						var $this = $(this);
 						var $activeForm = $this.parents('.t-form');
 						var inputBoxForm = $this.parents('.t-form__inputsbox');
-						var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
+						// var errorOnScreen = t_form_checkOnError($activeForm, formScreen, currentScreen);
+						var errorOnScreen = false;
 						t_form_calculateCoverHeight($this.parents('.t-rec'), coverHeight);
 						if (!errorOnScreen) {
 							currentScreen++;
@@ -129,6 +130,8 @@
 			var newProgressLength = parseFloat(progressBarLength - direction * progressStep).toFixed(3);
 			progressBar.css('stroke-dashoffset', newProgressLength);
 			progressBar.attr('stroke-dashoffset', newProgressLength);
+
+			console.log(newProgressLength);
 		}
 
 
@@ -205,7 +208,7 @@
 				}, 2000);
 				}
 			}
-			
+
 			if (hcontent < hcover) {
 				el.find('.t-cover').height(coverHeight);
 				el.find('.t-cover__filter').height(coverHeight);
