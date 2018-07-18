@@ -1,6 +1,10 @@
 import WelcomeView from './view/WelcomeView.js';
+import ErrorView from './view/ErrorView.js';
+import WinnerResultView from './view/WinnerResultView.js';
+import LevelView from './view/LevelView.js';
 import GameScreen from './GameScreen.js';
 import GameModel from './GameModel.js';
+import Levels from './data/levelsData.js';
 
 const main = document.querySelector(`.main`);
 
@@ -10,6 +14,16 @@ const changeView = (element) => {
 };
 
 export default class Application {
+  static start() {
+    const splash = new LevelView();
+    changeView(splash.element);
+    splash.start();
+    Levels.loadData()
+        .then(this.showWelcome)
+        .catch(this.showError)
+        .then(() => splash.stop());
+  }
+
   static showWelcome() {
     const welcome = new WelcomeView();
     welcome.element.className = `main main--welcome`;
@@ -23,8 +37,29 @@ export default class Application {
     gameScreen.startGame();
   }
 
-  static showStats(view) {
-    view.element.className = `main main--result`;
-    changeView(view.element);
+  static showStats(model) {
+    const splash = new LevelView();
+    changeView(splash.element);
+    splash.start();
+    Levels.saveResults(model.answer)
+        .then(() => Levels.loadResults())
+        .then((data) => {
+          const win = new WinnerResultView(model, data);
+          win.element.className = `main main--result`;
+          changeView(win.element);
+        })
+        .catch(this.showError)
+        .then(() => splash.stop());
+  }
+
+  static showEnd(view) {
+    const endScreen = view;
+    endScreen.element.className = `main main--result`;
+    changeView(endScreen.element);
+  }
+
+  static showError(error) {
+    const errorView = new ErrorView(error);
+    changeView(errorView.element);
   }
 }
