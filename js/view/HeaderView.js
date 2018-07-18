@@ -1,10 +1,8 @@
 import AbstractView from './AbstractView.js';
-import {gameRules} from '../data/gameData.js';
-
-export const SEC_PER_MIN = 60;
+import {GAME_RULES} from '../data/gameData.js';
 
 export const getMinute = function (time) {
-  return Math.trunc(time / SEC_PER_MIN);
+  return Math.trunc(time / GAME_RULES.secPerMin);
 };
 
 const RADIUS = 370;
@@ -20,8 +18,9 @@ export default class HeaderView extends AbstractView {
     super();
     this.state = state;
     this.lengthRound = Math.round(2 * Math.PI * RADIUS);
-    this.shadowRound = this.lengthRound / (gameRules.MAX_TIME);
-    this.timerView = this.shadowRound * (gameRules.MAX_TIME - this.state.time);
+    this.shadowRound = this.lengthRound / (GAME_RULES.maxTime);
+    this.timerView = this.shadowRound * (GAME_RULES.maxTime - this.state.time);
+    this.timerAlert = this.time <= GAME_RULES.quickTime ? `timer-value--finished` : ``;
   }
 
   get template() {
@@ -36,9 +35,29 @@ export default class HeaderView extends AbstractView {
         <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
           <span class="timer-value-mins">${getMinute(this.state.time)}</span>
           <span class="timer-value-dots">:</span>
-          <span class="timer-value-secs">${this.state.time - getMinute(this.state.time) * SEC_PER_MIN}</span>
+          <span class="timer-value-secs">${this.state.time - getMinute(this.state.time) * GAME_RULES.secPerMin}</span>
         </div>
       </svg>
       <div class="main-mistakes">${drawLives(this.state.mistakes)}</div>`;
+  }
+
+  renderMinutes(time) {
+    const minutesElement = this.element.querySelector(`.timer-value-mins`);
+    minutesElement.textContent = `${getMinute(time)}`;
+  }
+
+  renderSeconds(time) {
+    const secondsElement = this.element.querySelector(`.timer-value-secs`);
+    secondsElement.textContent = `${time - getMinute(time) * GAME_RULES.secPerMin}`;
+  }
+
+  renderRound(time) {
+    const timerRound = this.element.querySelector(`.timer`);
+    timerRound.setAttribute(`stroke-dashoffset`, this.shadowRound * (GAME_RULES.maxTime - time));
+  }
+
+  setColorTime() {
+    const timer = this.element.querySelector(`.timer-value`);
+    timer.classList.add(`.timer-value--finished`);
   }
 }

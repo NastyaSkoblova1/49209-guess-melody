@@ -6,6 +6,7 @@ import GameScreen from './GameScreen.js';
 import GameModel from './GameModel.js';
 import Levels from './data/levelsData.js';
 
+let gameData;
 const main = document.querySelector(`.main`);
 
 const changeView = (element) => {
@@ -24,14 +25,15 @@ export default class Application {
         .then(() => splash.stop());
   }
 
-  static showWelcome() {
+  static showWelcome(data) {
+    gameData = data;
     const welcome = new WelcomeView();
     welcome.element.className = `main main--welcome`;
     changeView(welcome.element);
   }
 
   static showGame() {
-    const model = new GameModel();
+    const model = new GameModel(gameData);
     const gameScreen = new GameScreen(model);
     changeView(gameScreen.element);
     gameScreen.startGame();

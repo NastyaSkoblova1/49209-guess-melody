@@ -1,11 +1,14 @@
 import HeaderView from './view/HeaderView.js';
 import ArtistView from './view/ArtistView.js';
 import GenreView from './view/GenreView.js';
-import WinnerResultView from './view/WinnerResultView.js';
 import LooseResultView from './view/LooseResultView.js';
 import TimeResultView from './view/TimeResultView.js';
-import {gameRules} from './data/gameData.js';
+import {GAME_RULES} from './data/gameData.js';
 import Application from './Application.js';
+
+const LEVEL_FAIL = -1;
+const END_GAME = 0;
+const TIMER_INTERVAL = 1000;
 
 const getCurrentView = (state) => {
   return state.getType() === `artist` ? new ArtistView(state.getCurrentLevel()) : new GenreView(state.getCurrentLevel());
@@ -30,61 +33,62 @@ class GameScreen {
 
   stopGame() {
     clearInterval(this._interval);
-    this.model.stopLevelTime = this.model.state.time;
+    this.model.state.endLevelTime = this.model._state.time;
   }
 
   startGame() {
     this.changeLevel();
-    this.model.startLevelTime = this.model.state.time;
+    this.model.state.startLevelTime = this.model.state.time;
 
     this._interval = setInterval(() => {
       this.model.tick();
-      this.updateHeader();
-    }, 1000);
+      this.header.renderMinutes(this.model.state.time);
+      this.header.renderSeconds(this.model.state.time);
+      this.header.renderRound(this.model.time);
+
+      if (this.model.state.time === GAME_RULES.quickTime) {
+        this.header.setColorTime();
+      }
+
+      if (this.model.state.time <= END_GAME) {
+        this.stopGame();
+        this.endGame(`timeout`);
+      }
+    }, TIMER_INTERVAL);
   }
 
   answer(answer) {
     this.stopGame();
+    this.model.nextLevel();
 
     switch (answer) {
       case true:
-        this.model.state.answers.push({answer, time: this.model.getLevelTime()});
-        this.model.nextLevel();
-        if (this.model.state.level >= gameRules.MAX_LEVEL) {
-          this.endGame(`win`);
+        this.model.state.answer.answers.push({answer, time: this.model.getLevelTime()});
+        if (this.checkLevel()) {
+          this.showStats();
         } else {
           this.startGame();
         }
         break;
       case false:
-        this.model.state.answers.push({answer, time: this.roundTime});
+        this.model.state.answer.answers.push(LEVEL_FAIL);
         this.model.loose();
-        this.model.nextLevel();
-        if (this.model.state.lives <= 0) {
+        this.updateHeader();
+        if (this.model.state.lives <= END_GAME) {
           this.endGame(`loose`);
+        } else if (this.checkLevel()) {
+          this.showStats();
         } else {
           this.startGame();
         }
         break;
     }
-  }
-
-  restart(continueGame) {
-    if (!continueGame) {
-      this.model.restart();
-    }
-
-    this.startGame();
   }
 
   updateHeader() {
     const header = new HeaderView(this.model.state);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
-    if (this.model.state.time <= 0) {
-      this.stopGame();
-      this.endGame(`timeout`);
-    }
   }
 
   changeLevel() {
@@ -94,22 +98,29 @@ class GameScreen {
     this.changeContentView(level);
   }
 
+  checkLevel() {
+    return this.model.state.level >= GAME_RULES.levelsAmount;
+  }
+
+  showStats() {
+    this.model.state.answer.time = GAME_RULES.maxTime - this.model._state.time;
+    Application.showStats(this.model._state);
+  }
+
   endGame(result) {
     let resultScreen = ``;
 
-    if (result === `win`) {
-      resultScreen = new WinnerResultView(this.model.state);
-    }
-
     if (result === `loose`) {
       resultScreen = new LooseResultView();
+      Application.showEnd(resultScreen);
     }
 
     if (result === `timeout`) {
       resultScreen = new TimeResultView();
+      Application.showEnd(resultScreen);
     }
 
-    Application.showStats(resultScreen);
+    this.model.restart();
   }
 
   changeContentView(view) {

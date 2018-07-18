@@ -1,15 +1,17 @@
 import {INITIAL_STATE} from './data/gameData.js';
-import LEVELS from './data/levels.js';
-
-const getLevel = (state) => LEVELS[state.level];
 
 class GameModel {
-  constructor() {
+  constructor(data) {
+    this.data = data;
     this.restart();
   }
 
   get state() {
     return this._state;
+  }
+
+  getLevel() {
+    return this.data[this._state.level];
   }
 
   nextLevel() {
@@ -26,15 +28,16 @@ class GameModel {
   }
 
   getCurrentLevel() {
-    return getLevel(this._state);
+    return this.getLevel(this._state);
   }
 
   getType() {
-    return LEVELS[this._state.level].type;
+    return this.data[this._state.level].type;
   }
 
   restart() {
-    this._state = INITIAL_STATE;
+    this._state = Object.assign({}, INITIAL_STATE);
+    this._state.answer.answers = [];
   }
 
   tick() {

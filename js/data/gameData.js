@@ -1,10 +1,14 @@
-export const gameRules = {
-  LEVELS_AMOUNT: 10,
-  FAIL_AMOUNT: 2,
-  MAX_TIME: 300,
-  LIVES: 3,
-  MAX_LEVEL: 10,
-  QUICK_TIME: 30
+export const GAME_RULES = {
+  levelsAmount: 10,
+  failAmount: 3,
+  maxTime: 300,
+  quickTime: 30,
+  secPerMin: 60,
+  minutes: [`минуту`, `минуты`, `минут`],
+  seconds: [`секунду`, `секунды`, `секунд`],
+  mistakes: [`ошибку`, `ошибки`, `ошибок`],
+  quick: [`быстрый`, `быстрых`, `быстрых`],
+  points: [`балл`, `балла`, `баллов`]
 };
 
 export const INITIAL_STATE = {
@@ -14,7 +18,9 @@ export const INITIAL_STATE = {
   endLevelTime: 0,
   levelTime: 0,
   lives: 3,
-  time: gameRules.MAX_TIME,
-  answers: [],
-  statistics: [6, 12, 15]
+  time: GAME_RULES.MAX_TIME,
+  answer: {
+    time: 0,
+    answers: []
+  }
 };

@@ -1,3 +1,3 @@
 import Application from './Application.js';
 
-Application.showWelcome();
+Application.start();

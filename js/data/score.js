@@ -1,24 +1,23 @@
-const MAX_TIME = 30;
-const LEVELS_AMOUNT = 10;
+import {GAME_RULES} from './gameData.js';
 
 const getScore = (item) => {
-  if (item.time < MAX_TIME && item.answer === true) {
+  if (item === -1) {
+    return -2;
+  }
+
+  if (item.time < GAME_RULES.quickTime) {
     return 2;
   }
 
-  if (item.time >= MAX_TIME && item.answer === true) {
+  if (item >= GAME_RULES.quickTime) {
     return 1;
-  }
-
-  if (item.answer === false) {
-    return -2;
   }
 
   return 0;
 };
 
 export default (answersArray) => {
-  if (answersArray.length < LEVELS_AMOUNT) {
+  if (answersArray.length < GAME_RULES) {
     return -1;
   }
 
